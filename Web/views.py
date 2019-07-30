@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views import View
 from django.http import HttpResponse

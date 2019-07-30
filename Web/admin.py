@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ## paresd_data/admin.py
 from django.contrib import admin
 ## models에서 EverytimeDAta를 import 해준다.

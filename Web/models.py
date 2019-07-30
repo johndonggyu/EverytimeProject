@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 ## 주요 Field Option
 # 필드 옵션 : 필드마다 고유 옵션이 존재, 공통 적용 옵션도 있음
