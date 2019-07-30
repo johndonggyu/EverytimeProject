@@ -123,13 +123,13 @@ if __name__ == '__main__':
 					print(e)
 					pass
 
-			wc = WordCloud(relative_scaling = 0.8,width=1600,height=1600,font_path=dir_font + "NanumGothic.ttf", background_color='white').generate_from_frequencies(dict(ngram3_major_top100))
-			plt.figure(figsize=(20, 20))
-			plt.imshow(wc, interpolation="bilinear")
-			plt.axis("off")
-			plt.tight_layout(pad=0)
-			outputfile_name = dir_static + "wc/"+str(hakgua)+"Ng3_"+str(datetime.now().year)+".png"
-			plt.savefig(outputfile_name, bbox_inches='tight', edgecolor='none')
+			#wc = WordCloud(relative_scaling = 0.8,width=1600,height=1600,font_path=dir_font + "NanumGothic.ttf", background_color='white').generate_from_frequencies(dict(ngram3_major_top100))
+			#plt.figure(figsize=(20, 20))
+			#plt.imshow(wc, interpolation="bilinear")
+			#plt.axis("off")
+			#plt.tight_layout(pad=0)
+			#outputfile_name = dir_static + "wc/"+str(hakgua)+"Ng3_"+str(datetime.now().year)+".png"
+			#plt.savefig(outputfile_name, bbox_inches='tight', edgecolor='none')
 	#
 
 	print("--- %s seconds ---" % (time.time() - start_time))

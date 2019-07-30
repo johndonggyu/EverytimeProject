@@ -204,6 +204,7 @@ if __name__ == '__main__':
 	#smu_professor 에서 이름, 학과 꺼내오기.
 	for yo in smu_professor.objects.all():
 	#for yo in smu_professor.objects.filter(major='컴퓨터과학과'):
-		draw_wordcloud(yo.major, yo.professor, one_list(yo.professor, yo.major), yo.professor+'-'+yo.major+str(datetime.now().year))
+		#draw_wordcloud(yo.major, yo.professor, one_list(yo.professor, yo.major), yo.professor+'-'+yo.major+str(datetime.now().year))
+		one_list(yo.professor, yo.major)
 
 	print("--- %s seconds ---" % (time.time() - start_time))

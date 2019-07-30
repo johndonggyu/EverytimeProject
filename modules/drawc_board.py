@@ -180,7 +180,8 @@ if __name__ == '__main__':
 		print("크롤링을 먼저 진행 후 실행해주세요.")
 	elif(board_keyword.objects.filter(code=boardcode_).count() == 0):
 		print("키워드 테이블이 비었습니다. 바로 wordcloud 만들겠습니다.")
-		draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
+		#draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
+		one_list(boardcode_, _date)
 	else:
 		tmp = board_keyword.objects.filter(code=boardcode_).order_by('-word_date').first()
 		if(str(tmp.word_date)[0:7] == _date[0:7]):
@@ -194,7 +195,8 @@ if __name__ == '__main__':
 				del_obj = board_keyword.objects.filter(word_date__range=(start, end),code=boardcode_)
 				del_obj.filter(code=boardcode_).delete()
 				print("이미 만든 달의 데이터는 삭제되고 다시 추가됩니다.")
-				draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
+				#draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
+				one_list(boardcode_, _date)
 
 	#draw_wordcloud(one_list(boardcode_), 'jagae')
 	#draw_wordcloud(one_list(1, '369474'), 'saenaegi')

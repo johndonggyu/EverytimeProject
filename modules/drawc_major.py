@@ -157,6 +157,7 @@ if __name__ == '__main__':
 
 	for i in major_synonym.objects.all():
 	#for i in major_synonym.objects.filter(major='계당교양교육원'):
-		draw_wordcloud(one_list(i.major, i.synonym), i.major)
+		#draw_wordcloud(one_list(i.major, i.synonym), i.major)
+		one_list(i.major, i.synonym)
 
 	print("--- %s seconds ---" % (time.time() - start_time))

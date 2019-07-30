@@ -702,3 +702,9 @@ runserver 또는 makemigrations, migrate 할 것.
 기존의 인터넷 창이 뜨던 걸, headless로 변경함으로써, 창이 안뜨도록 만듦.
 이렇게 바꾼 이유: 우분투에서도 동작하게 하기 위함.
 
+
+#5 github 버전만 해당
+draw_wordcloud함수 다 제거함.
+이미지파일로 워드클라우드 생성 안함.
+keyword테이블에 넣기만하고,
+객체화로 바로 출력하게함.
