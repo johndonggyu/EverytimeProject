@@ -685,9 +685,11 @@ settings.py 는 home에 있음.
 백엔드는 modules폴더, DB관련 파일인 Web폴더 안의 models.py 파일,
 url경로마다의 기능은 views.py파일 참고.
 
+
 #2 major_ngram_keyword 모델 생성함 
 - 객체화를 위해 저장이 필요함.
 그래서 drawc_ngram_major.py 에 db에 넣는거 적용시킴.
+
 
 #3 사용법 다시 공지
 모듈 실행법: 무조건 modules폴더 안에 들어가서 python 모듈이름.py 실행할것
@@ -695,4 +697,8 @@ url경로마다의 기능은 views.py파일 참고.
 서버 실행법: EverytimeProject 폴더(manage.py 파일 있는 곳)에서
 runserver 또는 makemigrations, migrate 할 것.
 
+
+#4 save_smu_professor.py 수정
+기존의 인터넷 창이 뜨던 걸, headless로 변경함으로써, 창이 안뜨도록 만듦.
+이렇게 바꾼 이유: 우분투에서도 동작하게 하기 위함.
 

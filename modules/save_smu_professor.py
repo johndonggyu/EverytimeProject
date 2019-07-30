@@ -13,6 +13,15 @@ django.setup()
 from Web.models import smu_professor
 from multiprocessing import Pool
 
+## webdriver headless 모드 전환
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('window-size=1920x1080')
+options.add_argument("disable-gpu")
+
+#headless 막는 서버라면 아래 추가(안해도 될듯)
+#options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
+
 def parse_prof():
 	#교양 교수님들 정보만 담을 리스트
 	nm_name_list = [] #교수명
@@ -26,7 +35,7 @@ def parse_prof():
 	info_list = [] #교수정보
 	picture_list = [] #사진
 	#크롬 연결
-	driver = webdriver.Chrome('chromedriver')
+	driver = webdriver.Chrome('chromedriver', chrome_options=options)
 	driver.implicitly_wait(3)
 	#계당교양교육원 교양
 	driver.get('https://www.smu.ac.kr/smgs/intro/professor.do?mode=list&&pagerLimit=50&pager.offset=0')
