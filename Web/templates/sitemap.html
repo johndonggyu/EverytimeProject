@@ -1,0 +1,585 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+		<!-- sitemap section  -->
+          <div class="sitemap">
+            <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class="text-priamry">
+                      <tr>
+                      	<th>
+                      		교수님별 프로파일링
+                      	</th>
+                      	<th>
+                      		학과
+                      	</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                         <td>
+                          <a href="{% url 'pf' pf_id=2 %}" style="font-weight: bold;">인문사회과학대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=3 %}">역사콘텐츠학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=4 %}">지적재산학과</a>
+                        </td>
+                      </tr>
+                         <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=5 %}">문헌정보학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                         <a href="{% url 'pf' pf_id=10 %}">한일문화콘텐츠학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=6 %}">공간환경학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=7 %}">공공인재학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=8 %}">가족복지학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=9 %}">국가안보학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                          <a href="{% url 'pf' pf_id=11 %}" style="font-weight: bold;">사범대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=12 %}">국어교육과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=13 %}">영어교육과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=14 %}">교육학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=15 %}">수학교육과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                          <a href="{% url 'pf' pf_id=16 %}" style="font-weight: bold;">경영경제대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=17 %}">경제금육학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=18 %}">경영학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=19 %}" >글로벌경영학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=20 %}" >융합경영학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                          <a href="{% url 'pf' pf_id=21 %}" style="font-weight: bold;">융합공과대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=22 %}">휴먼지능정보공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=23 %}">전기공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=24 %}">융합전자공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=25 %}">컴퓨터과학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                          <a href="" style="font-weight: bold;">생명화학공학부</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=26 %}">생명공학과</a>
+                        </td>
+                      </tr>
+                         <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=27 %}">화학에너지공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=28 %}">화공신소재학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=29 %}">게임학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                          <a href="{% url 'pf' pf_id=30 %}" style="font-weight: bold;">문화예술대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=31 %}">식품영양학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=32 %}">의류학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=33 %}">스포츠건강관리학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=34 %}">조형예술학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=35 %}">생활예술학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=36 %}">무용예술학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=37 %}">음악학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'pf' pf_id=38 %}">계당교양교육원</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+
+	<div class="sitemap">
+			<div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter table-condensed" id="">
+                    <thead class="text-primary">
+                      <tr>
+                      	<th>
+                      		학과별 프로파일링
+                      	</th>
+                      	<th >
+                      		학과
+                      	</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                      	 <td>
+                          <a href="{% url 'major' m_id=2 %}" style="font-weight: bold;">인문사회과학대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=3 %}">역사콘텐츠학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=4 %}">지적재산학과</a>
+                        </td>
+                      </tr>
+                         <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=5 %}">문헌정보학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                         <a href="{% url 'major' m_id=10 %}">한일문화콘텐츠학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=6 %}">공간환경학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=7 %}">공공인재학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=8 %}">가족복지학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=9 %}">국가안보학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                      	 	<a href="{% url 'major' m_id=11 %}" style="font-weight: bold;">사범대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=12 %}">국어교육과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=13 %}">영어교육과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=14 %}">교육학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=15 %}">수학교육과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                      	 	<a href="{% url 'major' m_id=16 %}" style="font-weight: bold;">경영경제대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=17 %}">경제금육학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=18 %}">경영학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=19 %}" >글로벌경영학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=20 %}" >융합경영학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                      	 	<a href="{% url 'major' m_id=21 %}" style="font-weight: bold;">융합공과대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=22 %}">휴먼지능정보공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=23 %}">전기공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=24 %}">융합전자공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=25 %}">컴퓨터과학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                      	 	<a href="" style="font-weight: bold;">생명화학공학부</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=26 %}">생명공학과</a>
+                        </td>
+                      </tr>
+                      	 <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=27 %}">화학에너지공학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=28 %}">화공신소재학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=29 %}">게임학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                      	 	<a href="{% url 'major' m_id=30 %}" style="font-weight: bold;">문화예술대학</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=31 %}">식품영양학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=32 %}">의류학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=33 %}">스포츠건강관리학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=34 %}">조형예술학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=35 %}">생활예술학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=36 %}">무용예술학과</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=37 %}">음악학부</a>
+                        </td>
+                      </tr>
+                      <tr>
+                         <td>
+                        </td>
+                        <td>
+                          <a href="{% url 'major' m_id=38 %}">계당교양교육원</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+		    <div class="sitemap">
+		    	<div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter" id="">
+                    <thead class="text-primary">
+                      <tr>
+                      	<th>
+                      		게시판 프로파일링
+                      	</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                      	 <td>
+                      	 	<a href="{% url 'bbs' blog_id=2 %}">자유게시판</a>
+                        </td>
+                      </tr>
+                      	<td>
+                          <a href="{% url 'bbs' blog_id=3 %}">새내기게시판</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          <a href="{% url 'bbs' blog_id=4 %}">핫게시글</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+         <div class="sitemap">
+		      	<div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter" id="">
+                    <thead class="text-primary">
+                      <tr>
+                      	<th>
+                      		기타
+                      	</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                      	 <td>
+                      	 	<a href="{% url 'us' %}">About US</a>
+                        </td>
+                      </tr>
+                      <tr>
+                      	 <td>
+                      	 	<a href="{% url 'faq' %}">FAQ</a>
+                        </td>
+                      </tr>
+                       <tr>
+                         <td>
+                          <a href="{% url 'faq' %}"></a>
+                        </td>
+                      </tr>
+                                            <tr>
+                         <td>
+                          <a href="{% url 'faq' %}"></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+		<!-- sitemap section end -->
+{% endblock %}
