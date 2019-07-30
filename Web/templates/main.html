@@ -1,0 +1,538 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>Sangmyung Times</title>
+	<meta charset="UTF-8">
+	<meta name="description" content=" Divisima | eCommerce Template">
+	<meta name="keywords" content="divisima, eCommerce, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="{% static 'img/favicon.ico'%}" rel="shortcut icon"/>
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}"/>
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}"/>
+	<link rel="stylesheet" href="{% static 'css/flaticon.css'%}"/>
+	<link rel="stylesheet" href="{% static 'css/style.css'%}"/>
+ <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="{% static 'css/nucleo-icons.css'%}" rel="stylesheet" />
+  <!-- CSS Files -->
+
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="{% static 'demo/demo.css'%}"rel="stylesheet" />
+
+
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-2 text-center text-lg-left">
+							<!-- logo -->
+							<a href="{% static './main3.html'%}" class="site-logo">
+								<img src="{% static 'img/sm.jpg'%}" alt="">
+							</a>
+						</div>
+						<div class="col-xl-6 col-lg-5">
+							<form class="header-search-form">
+								<input type="text" placeholder="감성분석 키워드를 검색하세요">
+								<button><i class="flaticon-search"></i></button>
+							</form>
+						</div>
+						<div class="col-xl-4 col-lg-5">
+							<div class="user-panel">
+								<div class="up-item">
+									<div class="shopping-card">
+										<i class="flaticon-profile"></i>
+									</div>
+									<a href="{% static '../logout'%}">로그아웃</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav class="main-navbar">
+				<div class="container">
+					<!-- menu -->
+					<ul class="main-menu">
+						<li><a href="{% url 'bbs' blog_id=1 %}">게시판 프로파일링
+							<span class="new">New</span></a>
+							<ul class="sub-menu">
+								<li><a href= "{% url 'bbs' blog_id=2 %}">자유게시판</a></li>
+								<li><a href="{% url 'bbs' blog_id=3 %}">새내기게시판</a></li>
+								<li><a href="{% url 'bbs' blog_id=4 %}">HOT 게시글<span class="hot">HOT</span></a></li>
+							
+							</ul>
+						</li>
+						<li><a href="{% url 'pf' pf_id=1 %}">교수님별 프로파일링</a>
+							<ul class="sub-menu">
+								<li><a href="{% url 'pf' pf_id=2 %}">인문사회과학대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'pf' pf_id=3 %}">역사콘텐츠학과</a></li>
+										<li><a href="{% url 'pf' pf_id=4 %}">지적재산학과</a></li>
+										<li><a href="{% url 'pf' pf_id=5 %}">문헌정보학과</a></li>
+										<li><a href="{% url 'pf' pf_id=6 %}">공간환경학부</a></li>
+										<li><a href="{% url 'pf' pf_id=7 %}">공공인재학부</a></li>
+										<li><a href="{% url 'pf' pf_id=8 %}">가족복지학과</a></li>
+										<li><a href="{% url 'pf' pf_id=9 %}">국가안보학과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'pf' pf_id=10 %}">사범대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'pf' pf_id=11 %}">국어교육과</a></li>
+										<li><a href="{% url 'pf' pf_id=12 %}">영어교육과</a></li>
+										<li><a href="{% url 'pf' pf_id=13 %}">교육학과</a></li>
+										<li><a href="{% url 'pf' pf_id=14 %}">수학교육과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'pf' pf_id=15 %}">경영경제대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'pf' pf_id=16 %}">경제금육학부</a></li>
+										<li><a href="{% url 'pf' pf_id=17 %}">경영학부</a></li>
+										<li><a href="{% url 'pf' pf_id=18 %}">글로벌경영학과</a></li>
+										<li><a href="{% url 'pf' pf_id=19 %}">융합경영학과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'pf' pf_id=20 %}">융합공과대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'pf' pf_id=21 %}">휴먼지능정보공학과</a></li>
+										<li><a href="{% url 'pf' pf_id=22 %}">전기공학과</a></li>
+										<li><a href="{% url 'pf' pf_id=23 %}">융합전자공학과</a></li>
+										<li><a href="{% url 'pf' pf_id=24 %}">컴퓨터과학과</a></li>
+										<li><a href="{% url 'pf' pf_id=25 %}">생명공학과</a></li>
+										<li><a href="{% url 'pf' pf_id=26 %}">화학에너지공학과</a></li>
+										<li><a href="{% url 'pf' pf_id=27 %}">화공신소재학과</a></li>
+										<li><a href="{% url 'pf' pf_id=28 %}">게임학과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'pf' pf_id=29 %}">문화예술대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'pf' pf_id=30 %}">식품영양학과</a></li>
+										<li><a href="{% url 'pf' pf_id=31 %}">의류학과</a></li>
+										<li><a href="{% url 'pf' pf_id=32 %}">스포츠건강관리학과</a></li>
+										<li><a href="{% url 'pf' pf_id=33 %}">무용예술학과</a></li>
+										<li><a href="{% url 'pf' pf_id=34 %}">조형예술학과</a></li>
+										<li><a href="{% url 'pf' pf_id=35 %}">생활예술학과</a></li>
+										<li><a href="{% url 'pf' pf_id=36 %}">음악학부</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'pf' pf_id=37 %}">계당교양교육원</a></li>
+							</ul>
+						</li>
+						<li><a href="{% url 'major' m_id=1 %}">학과 프로파일링</a>
+							<ul class="sub-menu">
+								<li><a href="{% url 'major' m_id=2 %}">인문사회과학대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'major' m_id=3 %}">역사콘텐츠학과</a></li>
+										<li><a href="{% url 'major' m_id=4 %}">지적재산학과</a></li>
+										<li><a href="{% url 'major' m_id=5 %}">문헌정보학과</a></li>
+										<li><a href="{% url 'major' m_id=6 %}">공간환경학부</a></li>
+										<li><a href="{% url 'major' m_id=7 %}">공공인재학부</a></li>
+										<li><a href="{% url 'major' m_id=8 %}">가족복지학과</a></li>
+										<li><a href="{% url 'major' m_id=9 %}">국가안보학과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'major' m_id=10 %}">사범대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'major' m_id=11 %}">국어교육과</a></li>
+										<li><a href="{% url 'major' m_id=12 %}">영어교육과</a></li>
+										<li><a href="{% url 'major' m_id=13 %}">교육학과</a></li>
+										<li><a href="{% url 'major' m_id=14 %}">수학교육과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'major' m_id=15 %}">경영경제대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'major' m_id=16 %}">경제금육학부</a></li>
+										<li><a href="{% url 'major' m_id=17 %}">경영학부</a></li>
+										<li><a href="{% url 'major' m_id=18 %}">글로벌경영학과</a></li>
+										<li><a href="{% url 'major' m_id=19 %}">융합경영학과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'major' m_id=20 %}">융합공과대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'major' m_id=21 %}">휴먼지능정보공학과</a></li>
+										<li><a href="{% url 'major' m_id=22 %}">전기공학과</a></li>
+										<li><a href="{% url 'major' m_id=23 %}">융합전자공학과</a></li>
+										<li><a href="{% url 'major' m_id=24 %}">컴퓨터과학과</a></li>
+										<li><a href="{% url 'major' m_id=25 %}">생명공학과</a></li>
+										<li><a href="{% url 'major' m_id=26 %}">화학에너지공학과</a></li>
+										<li><a href="{% url 'major' m_id=27 %}">화공신소재학과</a></li>
+										<li><a href="{% url 'major' m_id=28 %}">게임학과</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'major' m_id=29 %}">문화예술대학</a>
+									<ul class="side-menu">
+										<li><a href="{% url 'major' m_id=30 %}">식품영양학과</a></li>
+										<li><a href="{% url 'major' m_id=31 %}">의류학과</a></li>
+										<li><a href="{% url 'major' m_id=32 %}">스포츠건강관리학과</a></li>
+										<li><a href="{% url 'major' m_id=33 %}">무용예술학과</a></li>
+										<li><a href="{% url 'major' m_id=34 %}">조형예술학과</a></li>
+										<li><a href="{% url 'major' m_id=35 %}">생활예술학과</a></li>
+										<li><a href="{% url 'major' m_id=36 %}">음악학부</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'major' m_id=37 %}">계당교양교육원</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!-- Header section end -->
+
+
+	<!-- Features section -->
+	<section class="features-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4 p-0 feature">
+					<div class="feature-inner">
+						<div class="feature-icon">
+							<img src="{% static 'img/icons/1.png'%}" alt="#">
+						</div>
+						<h4>게시글 수 : 13675 </h4>
+					</div>
+				</div>
+				<div class="col-md-4 p-0 feature">
+					<div class="feature-inner">
+						<div class="feature-icon">
+							<img src="{% static 'img/icons/2.png'%}" alt="#">
+						</div>
+						<h4>키워드 # : 19632 </h4>
+					</div>
+				</div>
+				<div class="col-md-4 p-0 feature">
+					<div class="feature-inner">
+						<div class="feature-icon">
+							<img src="{% static 'img/icons/3.png'%}" alt="#">
+						</div>
+						<h6>최근 업데이트 날짜 : 2019-05-21 </h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Features section end -->
+
+	<section class="product-filter-section">
+		<div class="container">
+			<!-- 총 게시글 수, 총 댓글 수, 같은 통계자료 추후 제공 예정 -->
+
+			<!-- 자유 프로파일링 워드클라우드 시작 -->
+			<div class="row">
+					<div class="col-xs-6 col-md-1">
+					</div>
+					<div class="col-xs-12 col-md-10">
+						<div class="checkout-cart">
+							<div class="section-title">
+									<h3> WordCloud </h3>
+							</div>
+							<div class="bf-pic">
+									<img src="{% static './img/word.png'%}"  alt="">
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-1">
+					</div>
+				</div>
+			<!-- 학과 프로파일링 워드클라우드 끝 -->
+			
+			<!-- 학과 통계분석자료 시작 -->
+			<div class="row">
+					<div class="col-xs-6 col-md-1">
+					</div>
+				<div class="col-xs-12 col-md-5">
+					<div class="checkout-cart">
+							<div class="section-title">
+									<h4> 통계 분석 그래프 </h4>
+							</div>
+						<div class="bf-pic2">
+							<img src="{% static './img/graph.png'%}" alt="">
+						</div>
+					</div>
+					<div class="checkout-cart">
+							<div class="section-title">
+									<h4> 막대 그래프 </h4>
+							</div>
+						<div class="bf-pic2">
+							<img src="{% static './img/st.jpg'%}" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-5">
+					<div class="checkout-cart">
+							<div class="section-title">
+									<h4> HOT ISSUE </h4>
+							</div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                      <tr>
+                      	<th>
+                      		순위
+                      	</th>
+                        <th>
+                          키워드
+                        </th>
+                        <th class="text-center">
+                          검색횟수
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                      	 <td>
+                          1
+                        </td>
+                        <td>
+                          Dakota Rice
+                        </td>
+                        <td class="text-center">
+                          $36,738
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          2
+                        </td>
+                        <td>
+                          Minerva Hooper
+                        </td>
+                        <td class="text-center">
+                          $23,789
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          3
+                        </td>
+                        <td>
+                          Sage Rodriguez
+                        </td>
+                        <td class="text-center">
+                          $56,142
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          4
+                        </td>
+                        <td>
+                          Philip Chaney
+                        </td>
+                        <td class="text-center">
+                          $38,735
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          5
+                        </td>
+                        <td>
+                          Doris Greene
+                        </td>
+                        <td class="text-center">
+                          $63,542
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          6
+                        </td>
+                        <td>
+                          Mason Porter
+                        </td>
+                        <td class="text-center">
+                          $78,615
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          7
+                        </td>
+                        <td>
+                          Jon Porter
+                        </td>
+                        <td class="text-center">
+                          $98,615
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          8
+                        </td>
+                        <td>
+                          Jon Porter
+                        </td>
+                        <td class="text-center">
+                          $98,615
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          9
+                        </td>
+                        <td>
+                          Jon Porter
+                        </td>
+                        <td class="text-center">
+                          $98,615
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                          10
+                        </td>
+                        <td>
+                          Jon Porter
+                        </td>
+                        <td class="text-center">
+                          $98,615
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+					</div>
+				</div>
+					<div class="col-xs-6 col-md-1">
+					</div>
+			</div>
+			<!-- 학과 통계분석자료 끝 -->
+				
+			<!-- 학과 감성분석 시작 -->
+			<div class="row">
+				<div class="col-xs-6 col-md-1">
+				</div>
+				<div class="col-xs-12 col-md-10">
+					<div class="checkout-cart">
+							<div class="section-title">
+									<h3> 감성분석 자료 </h3>
+							</div>
+						<div class="bf-pic">
+								<img src="{% static './img/data.jpg'%}"  alt="">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-1">
+				</div>
+			</div>
+			<!-- 학과 감성분석 끝 -->
+
+			<!-- 댓글 박스 구현 -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="box box-primary">
+						<form class="contact-form">
+						<h3>댓글작성</h3>
+						<input type="text"  placeholder="내용">
+						<button class="btn btn-default btn-xs ">작성</button>
+						</form>
+					</div>
+				</div>		
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="box box-primary">
+						<form class="contact-form">
+              				<div class="card-header">
+		               		 <h6 class="title d-inline">댓글</h6>
+		              	</div>
+		              		<div class="card-body">
+		                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <h6 class="title">닉네임
+                          <p class="card-category d-inline">4주전</p></h6>
+                          <p class="text-muted">손교수님 강의력 ... 인즈엉</p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button class="btn" id="btn" type="submit"><img class="btn-img" src=""></button>
+                          <p>삭제</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6 class="title">닉네임
+                          <p class="card-category d-inline">5주전</p></h6>
+                          <p class="text-muted">과제 많당</p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button class="btn" id="btn" type="submit"><img class="btn-img" src=""></button>
+                          <p>삭제</p>
+                        </td>
+
+                      </tr>
+                      </tbody>
+                  </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+	<!-- Product filter section end -->
+
+
+	<!-- Footer section -->
+	<section class="footer-section">
+			<div class="container">
+			</div>
+			<div class="social-links-warp">
+				<div class="container">
+					<div class="social-links">
+						<a href="" class="instagram"><img src="{% static 'img/user.png'%}" height ="30px" weight="30px" alt=""><span>About us</span></a>
+						<a href="" class="instagram"><img src="{% static 'img/help.png'%}" height ="30px" weight="30px" alt=""><span>FAQ</span></a>
+						<a href="" class="instagram"><img src="{% static 'img/site.png'%}" height ="30px" weight="30px" alt=""><span>sitemap</span></a>
+						<a href="" class="instagram"><img src="{% static 'img/email.png'%}" height ="30px" weight="30px" alt=""><span>email</span></a>
+					</div>
+				</div>
+	
+	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> 
+	<p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> HaeOkSeong. All rights reserved
+	
+	
+	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	
+			</div>
+			</div>
+		</section>
+		<!-- Footer section end -->
+
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="{% static 'js/jquery-3.2.1.min.js'%}"></script>
+	<script src="{% static 'js/bootstrap.min.js'%}"></script>
+	<script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
+	<script src="{% static 'js/owl.carousel.min.js'%}"></script>
+	<script src="{% static 'js/jquery.nicescroll.min.js'%}"></script>
+	<script src="{% static 'js/jquery.zoom.min.js'%}"></script>
+	<script src="{% static 'js/jquery-ui.min.js'%}"></script>
+	<script src="{% static 'js/main.js'%}"></script>
+
+	</body>
+</html>

@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+      <!-- Page info -->
+  <div class="page-top-info">
+      <div class="container">
+        <h4>학과 프로파일링</h4>
+        <div class="site-pagination">
+          <a href="">{{ major }}</a>
+        </div>
+    </div>
+  </div>
+  <!-- Page info end -->
+
+  <!-- Features section -->
+  <section class="features-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 p-0 feature">
+          <div class="feature-inner">
+            <div class="feature-icon">
+              <img src="{% static 'img/icons/1.png'%}" alt="#">
+            </div>
+            <h4>총 게시글 수 : {{bcnt}} </h4>
+          </div>
+        </div>
+        <div class="col-md-4 p-0 feature">
+          <div class="feature-inner">
+            <div class="feature-icon">
+              <img src="{% static 'img/icons/2.png'%}" alt="#">
+            </div>
+            <h4>키워드 개수 : {{kwdcnt}} </h4>
+          </div>
+        </div>
+        <div class="col-md-4 p-0 feature">
+          <div class="feature-inner">
+            <div class="feature-icon">
+              <img src="{% static 'img/icons/3.png'%}" alt="#">
+            </div>
+            <h4>최근 업데이트 날짜 : {{updated|date:"Y-m-d h:m"}} </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Features section end -->
+
+  <section class="product-filter-section">
+    <div class="container">
+      <!-- 총 게시글 수, 총 댓글 수, 같은 통계자료 추후 제공 예정 -->
+
+      <!-- 자유 프로파일링 워드클라우드 시작 -->
+      <div class="row">
+          <div class="col-xs-6 col-md-1">
+          </div>
+          <div class="col-xs-12 col-md-10">
+            <div class="checkout-cart1">
+              <div class="section-title">
+                  <h3> WORLDCLOUD </h3>
+              </div>
+              {% comment %}
+              <div class="bf-pic">
+              	{% if wc_ng3_path %}
+                  <img src="{{ wc_ng3_path }}"  alt="">
+                {% endif %}
+              </div>
+              {% endcomment %}
+              {% if wc_ng3_path %}
+              <center>
+              <div id="n_word_cloud">
+              </div>
+          		</center>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-1">
+          </div>
+        </div>
+              <div class="row">
+          <div class="col-xs-6 col-md-1">
+          </div>
+          <div class="col-xs-12 col-md-10">
+            <div class="checkout-cart1">
+              <div class="section-title">
+                  <h3> WORLDCLOUD </h3>
+              </div>
+              {% comment %}
+              <div class="bf-pic">
+              	{% if wc_path %}
+                  <img src="{{  wc_path }}"  alt="">
+                {% endif %}
+              </div>
+              {% endcomment %}
+              {% if wc_path %}
+              <center>
+              <div id="word_cloud">
+               				</div>
+               </center>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-1">
+          </div>
+        </div>
+
+      <!-- 학과 프로파일링 워드클라우드 끝 -->
+      
+      <!-- 학과 통계분석자료 시작 -->
+      <div class="row">
+          <div class="col-xs-6 col-md-1">
+          </div>
+        <div class="col-xs-12 col-md-5">
+          <div class="checkout-cart">
+              <div class="section-title">
+                  <h4> 통계 분석 그래프 </h4>
+              </div>
+            <div class="bf-pic2">
+              <img src="{% static './img/graph.png'%}" alt="">
+            </div>
+          </div>
+          <div class="checkout-cart">
+              <div class="section-title">
+                  <h4> 막대 그래프 </h4>
+              </div>
+            <div class="bf-pic2">
+              <img src="{% static './img/st.jpg'%}" alt="">
+            </div>
+          </div>
+        </div>
+        {% if kwdcnt %}
+        <div class="col-xs-12 col-md-5">
+          <div class="checkout-cart" style="height: 780px">
+              <div class="section-title">
+                  <h4> HOT ISSUE </h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th>
+                          순위
+                        </th>
+                        <th>
+                          키워드
+                        </th>
+                        <th class="text-center">
+                          빈도수
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for key in t10kwd %}
+                      <tr>
+                         <td>
+                          {{forloop.counter}}
+                        </td>
+                        <td>
+                          {{ key.keyword }}
+                        </td>
+                        <td class="text-center">
+                          {{ key.count }}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+        </div>
+          <div class="col-xs-6 col-md-1">
+          </div>
+      </div>
+      {% endif %}
+      <!-- 학과 통계분석자료 끝 -->
+        
+      <!-- 학과 감성분석 시작 -->
+      <div class="row">
+        <div class="col-xs-6 col-md-1">
+        </div>
+        <div class="col-xs-12 col-md-10">
+          <div class="checkout-cart">
+              <div class="section-title">
+                  <h3> 감성분석 자료 </h3>
+              </div>
+            <div class="bf-pic">
+                <img src="{% static './img/data.jpg'%}"  alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-1">
+        </div>
+      </div>
+      <!-- 학과 감성분석 끝 -->
+
+      <!-- 댓글 박스 구현 -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="box box-primary">
+            <form class="contact-form">
+            <h3>댓글작성</h3>
+            <input type="text" style="vertical-align: middle;" placeholder="내용">
+            <button class="btn btn-default btn-xs" onclick="return confirm('작성하시겠습니까?')">작성</button>
+            </form>
+          </div>
+        </div>    
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="box box-primary">
+            <form class="contact-form">
+                      <div class="card-header">
+                       <h6 class="title d-inline">댓글</h6>
+                    </div>
+                      <div class="card-body">
+                      <table class="table">
+                    <tbody>
+                      {%for member in members %}
+                      <tr>
+                        <td>
+                          <h6 class="title">{{member.nickname}}
+                          <p class="card-category d-inline">{{member.date}}</p></h6>
+                          <p class="text-muted">{{member.content}}</p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button class="btn" id="btn" type="submit"><img class="btn-img" onclick="return confirm('정말 삭제하시겠습니까?')" src="{% static 'img/cancel.png'%}"></button>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      
+                      </tbody>
+                  </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+</form>
+</div>
+
+  <!-- 댓글 section end -->
+
+
+{% endblock %}

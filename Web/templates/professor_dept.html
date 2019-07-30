@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block content %}
+	<!-- Page info -->
+	<div class="page-top-info">
+			<div class="container">
+				<h4>교수님별 프로파일링</h4>
+
+				<div class="site-pagination">
+					<a href="">{{ majoring }} 교수님</a> 
+				</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+
+	<section class="product-filter-section">
+		<div class="container">
+			<div class="section-title">
+			</div>
+			<div class="row">
+				{% for p in professor %}
+				<div class="col-lg-3 col-sm-6">
+					<div class="professor-dept">
+						<div class="pd-pic">
+							<img src="{{ p.picture }}" width="150" alt="">
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-3 col-sm-6">
+					<div class="professor-dept">
+							<div class="pd-text">
+									<a href="/individual/{{major}}/{{p.professor}}">{{ p.professor }}</a>
+									<p>
+									<ul>
+									<li>{{ p.information|linebreaks }}
+									</li>
+									</ul>
+									</p>
+							</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="text-center pt-5">
+				<button class="site-btn sb-line sb-dark">LOAD MORE</button>
+			</div>
+		</div>
+	</section>
+	<!-- Product filter section end -->
+{% endblock %}
