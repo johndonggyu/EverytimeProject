@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ## UnicodeEncodeError: 때문에 임시로 넣어놓음.
 #import sys
 #import io
