@@ -708,3 +708,17 @@ draw_wordcloud함수 다 제거함.
 이미지파일로 워드클라우드 생성 안함.
 keyword테이블에 넣기만하고,
 객체화로 바로 출력하게함.
+
+===2019-08-05===
+
+#1 이메일 인증 관련
+이메일 인증용 계정(gmail)
+아이디: haeoksung1234@gmail.com
+비밀번호: everytime1234!@#$
+settings.py 참고
+
+이메일 인증 구현함.
+관련파일들: 
+views.py(activate, join), tokens.py, templates\user_activate_email.html
+추가로 변경한 사항: base.html 에서 로그인 했을 때 로그인한 계정의 이메일이 보이도록
+함. 

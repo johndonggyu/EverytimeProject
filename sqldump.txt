@@ -1,0 +1,25 @@
+#명령어들
+.output Web_board.sql
+.dump Web_board
+.output Web_board_keyword.sql
+.dump Web_board_keyword
+.output Web_colleges.sql
+.dump Web_colleges
+.output Web_eval.sql
+.dump Web_eval
+.output Web_lecture_evaluation.sql
+.dump Web_lecture_evaluation
+.output Web_lecture_time.sql
+.dump Web_lecture_time
+.output Web_major_keyword.sql
+.dump Web_major_keyword
+.output Web_major_ngram_keyword.sql
+.dump Web_major_ngram_keyword
+.output Web_major_synonym.sql
+.dump Web_major_synonym
+.output Web_majors.sql
+.dump Web_majors
+.output Web_professor_keyword.sql
+.dump Web_professor_keyword
+.output Web_search_major.sql
+.dump Web_search_major

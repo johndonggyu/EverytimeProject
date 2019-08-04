@@ -1,17 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.db import models
-## 주요 Field Option
-# 필드 옵션 : 필드마다 고유 옵션이 존재, 공통 적용 옵션도 있음
-# null (DB 옵션) : DB 필드에 NULL 허용 여부( default : False)
-# unique (DB 옵션) : 유일성 여부( default : false)
-# ...
-
-## 지원하는 모델 필드 타입
-# 주요 Field Types: AutoField, BooleanField, CharField, 
-# DateTimeField, FileField, ImageField, TextField
-# 주요 Relationship Types: ForeignKey, ManytoManyField, OneToOneField
-
+from django.db import models  
 # Create your models here.
+
 class colleges(models.Model):
 	college = models.CharField(default='',max_length=20)
 	

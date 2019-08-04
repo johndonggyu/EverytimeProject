@@ -31,6 +31,7 @@ urlpatterns = [
     path('login/', views.loGin.as_view(), name='login'),
     path('logout/', views.logOut, name='logout'),
     path('join/', views.join.as_view(), name='join'),
+    path('activate/<str:uid64>/<str:token>', views.activate, name='activate'),
     path('prejoin/', views.prejoin.as_view(), name='prejoin'),
     path('faq/', views.faq, name='faq'),
     path('sitemap/', views.sitemap, name='sitemap'),
