@@ -1564,7 +1564,7 @@ ul{
 
 .info-widget{
 	margin-bottom: :200px;
-	border:solid 1px #bababa;
+	border:solid 1px black;
 	max-width: 170px;
 	text-align: center;
 }
@@ -2801,6 +2801,12 @@ ul{
 	.social-links a span {
 		display: none;
 	}
+
+/* ----------------
+  error Page
+---------------------*/
+
+
 
 
 /*긁어옴 */

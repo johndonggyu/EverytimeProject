@@ -10,27 +10,24 @@
 <body class="body_login">
 		<div class="background">
 		<!-- login section  -->
-			<section class="login-section">
+			<section class="login-section" >
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-6 col-md-4">
 						</div>
 						<div class="col-xs-6 col-md-4">
-							<div class="checkout-cart" style="background-color: #ffffff" >
+							<div class="checkout-cart" style="height: 300px; background-color: #ffffff" >
 							<div class="login-section-header">
-						<h2>LOGIN</h2>
+						<h3>비밀번호 재설정</h3>
 							</div>
 							<form action="../login/" method="post">
 							{% csrf_token %}
-							<input type="text" placeholder="이메일을 입력하세요" style="width:100%" name="userid">
-							<input type="password" placeholder="비밀번호를 입력하세요" style="width:100%" name="password">
+							<input type="text" placeholder="새 비밀번호" style="width:100%" name="password">
+							<input type="text" placeholder="비밀번호 재입력" style="width:100%" name="password">
 							<br>
-							<p style="text-align: left"><input type="checkbox">로그인 상태 유지</p>
-							<input type="submit" class="btn btn-outline-dark" style="width:100%" value="로그인">
 							</form> 
 							<!-- <h6 style="text-align: left">아이디를 잊어버리셨나요?   <a href="#">FIND ID</a></h6> -->
-							<h6 style="text-align: left">비밀번호를 잊어버리셨나요?   <a href="#">FIND PASSWORD</a></h6>
-							<button onclick="nwindow()" type="submit" class="btn btn-outline-dark" style="width:100%" >회원가입</button>
+							<button type="submit" class="btn btn-outline-dark" style="width:100%" >변경하기</button>
 						</div>
 						</div>
 						<div class="col-xs-6 col-md-4">

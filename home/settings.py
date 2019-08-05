@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Web',
+    'django.contrib.sites',
+    'disqus'
 ]
 
 MIDDLEWARE = [

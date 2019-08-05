@@ -377,3 +377,33 @@ def word_cloud4(request, major_id):
 	except Exception as e:
 		print(e)
 		return HttpResponse("[]")
+
+#OK_수정
+def error(request):
+	return render(request, '404.html')
+
+def fpw1(request):
+	return render(request, 'fpw1.html')
+
+def fpw2(request):
+	return render(request, 'fpw2.html')	
+
+def change_pw(request):
+    context= {}
+    if request.method == "POST":
+        current_password = request.POST.get("origin_password")
+        user = request.user
+        if check_password(current_password,user.password):
+            new_password = request.POST.get("password1")
+            password_confirm = request.POST.get("password2")
+            if new_password == password_confirm:
+                user.set_password(new_password)
+                user.save()
+                auth.login(request,user)
+                return redirect("./main3.html")
+            else:
+                context.update({'error':"새로운 비밀번호를 다시 확인해주세요."})
+    else:
+        context.update({'error':"현재 비밀번호가 일치하지 않습니다."})
+
+    return render(request, "./main3.html",context)
