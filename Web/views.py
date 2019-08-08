@@ -52,8 +52,6 @@ def activate(request, uid64, token):
 		user = User.objects.get(pk=uid)
 	except Exception:
 		return HttpResponse('비정상적인 접근입니다.')
-	print(uid)
-	print(user)
 	if user is not None and account_activation_token.check_token(user, token):
 		user.is_active = True
 		user.save()
@@ -87,12 +85,16 @@ class join(View):
 			user.save()
 			current_site = get_current_site(request)
 			#localhost:8000
+			uid = urlsafe_base64_encode(force_bytes(user.pk)).encode().decode()
+			token = account_activation_token.make_token(user)
 			message = render_to_string('user_activate_email.html', {
 				'user':user,
 				'domain':current_site.domain,
-				'uid':urlsafe_base64_encode(force_bytes(user.pk)).decode(),
-				'token': account_activation_token.make_token(user),
+				'uid':uid,
+				'token': token,
 			})
+			print(uid)
+			print(token)
 			mail_subject = "[상명타임즈] 회원가입 인증 메일입니다."
 			user_email = user.username
 			email = EmailMessage(mail_subject, message, to=[user_email])
