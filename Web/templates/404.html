@@ -1,0 +1,72 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+button{
+  background:#f51167;
+  color:#fff;
+  border:none;
+  position:absolute;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#f51167;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #f51167;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+div.button{
+		margin: auto;
+   		width: 50%;
+   		margin-top: -200px;
+   		margin-left: 43%;
+
+	}
+</style>
+</head>
+<body>
+
+<img style="width: 1630px; height: 100%" src="{% static './img/error.png'%}">
+	<div class="button">
+	<button onclick="location.href={% url 'main'%}">HOME PAGE</button>
+	</div>
+
+</body>
+</html>
+
+
+
+
