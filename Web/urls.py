@@ -45,9 +45,9 @@ urlpatterns = [
     path('word_cloud/m/<str:major_id>', views.word_cloud3, name='word_cloud3'),
     path('word_cloud/<str:blog_id>', views.word_cloud, name='word_cloud'),
     path('word_cloud/<str:major_id>/<str:pf_id>', views.word_cloud2, name='word_cloud2'),
-    path('error/', frontend.blog.views.error, name='error'),
-    path('fpw1/', frontend.blog.views.fpw1, name='fpw1'),
-    path('fpw2/', frontend.blog.views.fpw2, name='fpw2'),
+    path('error/', views.error, name='error'),
+    path('fpw1/', views.fpw1, name='fpw1'),
+    path('fpw2/', views.fpw2, name='fpw2'),
 
 ]
 

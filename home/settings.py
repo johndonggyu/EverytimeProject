@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+################
+SITE_ID = 1
+
+DISQUS_API_SECRET = 'spOekEhOxTzOgBkzAdx55RWf84HC7TMhj50cSYC4w97o6zMaFqNmLqcwRR2JIpHa'
+DISQUS_API_KEY = 'ynAbOKyIArRl5oJaaZDVLAk8d3WhICPHvlxJ3cltqkKHq6m4OQdgLuO4lJfobVJc'
+DISQUS_WEBSITE_SHORTNAME = 'sangmyungtimez'
+
 #############
 EMAIL_HOST = 'smtp.gmail.com'
 # 메일을 호스트하는 서버
