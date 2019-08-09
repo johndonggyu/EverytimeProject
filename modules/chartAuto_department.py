@@ -250,53 +250,6 @@ def get_tokens_for_chart_department(each_Professor): #추후 구현 type_ =3, ma
 #5  출결 어떤지 계산 변수 attendanceMix attendanceDirect  attendanceDesignated attendanceElectronic attendanceNone , index [11-15]
 #6. 시험 횟수 많은지 계산 변수 test4above test3 test2 test1 testNone , index [16-20]
 
-def draw_chart_professor_assignment():
-    alist = get_tokens_for_chart_department(each_Professor)
-    if type(alist) == type(int):
-        if alist <= 0:
-            print('db가 비었습니다 : draw_chart_professor_assignment()')
-            return 0
-    #2. 과제 비율 계산 변수 assignmentMany assignmentNorm assignmentNone , index [1-3]
-    y1_value = (alist[1], alist[2], alist[3])
-    x_name =('많음', '보통', '없음')
-    n_groups = len(x_name)
-    index = np.arange(n_groups)
-    bar_width=0.4
-    opacity = 0.5
-
-    plt.bar(index, y1_value, bar_width, tick_label=x_name, align='center', alpha=opacity, color='b', label='과제비율')
-    plt.xlabel('과제 분량')
-    plt.ylabel('학생 응답 수(명)', position =(0.5,0.5), horizontalalignment='center', verticalalignment='top')
-    plt.title(objective_list[0].professor.professor.major+' 과제 분량') #차트에 제목 붙이기
-    plt.xlim(-1, n_groups)
-    plt.ylim(0,11)
-    outputfile_name = dir_static+everytime_data[0].professor.professor.major+" bar_chart_professor_assignment.png"
-    plt.savefig(outputfile_name)
-     #차트 이미지로 저장하기
-    plt.show()
-
-def draw_chart_professor_assignment():
-    alist = get_tokens_for_chart_department(each_Professor)
-    if type(alist) == type(int):
-        if alist <= 0:
-            print('db가 비었습니다 : draw_chart_professor_assignment()')
-            return 0
-    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-
-    labels = '많음', '보통','없음'
-    #labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
-    #3. 조모임 계산 변수 team_projectMany team_projectNorm  team_projectNone , index [4-6]
-    sizes = [alist[4], alist[5], alist[6]]
-    explode = (0, 0, 0.1)  # only "explode" the 3rd slice (i.e. '없음')
-
-    fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',shadow=True, startangle=90)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    outputfile_name = dir_static+everytime_data[0].professor.professor.major+" bar_chart_professor_team_project.png"
-    plt.savefig(outputfile_name)
-     #차트 이미지로 저장하기
-    plt.show()
-
 def draw_piechart_assignment_and_teamProject():
     alist = get_tokens_for_chart_department(each_Professor)
     if type(alist) == type(int):
@@ -341,7 +294,7 @@ def draw_piechart_assignment_and_teamProject():
         ax.axis('equal')
 
     #### 4. 그래프 저장하고 출력하기
-    plt.savefig('./frontend/static/chart/'+everytime_data[0].professor.professor.major+' ex_pieplot.png', format='png', dpi=400)
+    plt.savefig('./frontend/static/chart/'+each_Professor[0].professor.professor.major+' ex_pieplot.png', format='png', dpi=400)
     plt.show()
 
 def draw_barPlot_professor_Assignment():
@@ -379,7 +332,7 @@ def draw_barPlot_professor_TeamProject():
     df_TeamProject = pd.DataFrame(ds_TeamProject)
     sns.barplot(x="팀플", y="학생 응답 수",palette="Set2", data=df_TeamProject, linewidth=2.5, edgecolor=".2");
     plt.title(objective_list[0].professor.professor.major+' 팀플 비율') #차트에 제목 붙이기
-    outputfile_name = dir_static+everytime_data[0].professor.professor.major+" bar_chart_professor_TeamProject.png"
+    outputfile_name = dir_static+each_Professor[0].professor.professor.major+" bar_chart_professor_TeamProject.png"
     plt.savefig(outputfile_name)
      #차트 이미지로 저장하기
     plt.show()
@@ -400,7 +353,7 @@ def draw_barPlot_professor_Credit():
     df_Credit = pd.DataFrame(ds_Credit)
     sns.barplot(x="학점", y="학생 응답 수",palette="Set2", data=df_Credit, linewidth=2.5, edgecolor=".2");
     plt.title(objective_list[0].professor.professor.major+' 학점 비율') #차트에 제목 붙이기
-    outputfile_name = dir_static+everytime_data[0].professor.professor.major+" bar_chart_professor_Credit.png"
+    outputfile_name = dir_static+each_Professor[0].professor.professor.major+" bar_chart_professor_Credit.png"
     plt.savefig(outputfile_name)
     plt.show()
 
@@ -421,7 +374,7 @@ def draw_barPlot_professor_Attendence():
     df_Attendence = pd.DataFrame(ds_Attendence)
     sns.barplot(x="출결", y="학생 응답 수",palette="Set2", data=df_Attendence, linewidth=2.5, edgecolor=".2");
     plt.title(objective_list[0].professor.professor.major+' 출결 비율') #차트에 제목 붙이기
-    outputfile_name = dir_static+everytime_data[0].professor.professor.major+" bar_chart_professor_Attendence.png"
+    outputfile_name = dir_static+each_Professor[0].professor.professor.major+" bar_chart_professor_Attendence.png"
     plt.savefig(outputfile_name)
     plt.show()
 
@@ -442,7 +395,7 @@ def draw_barPlot_professor_Test():
     df_Test = pd.DataFrame(ds_Test)
     sns.barplot(x="시험 몇 번", y="학생 응답 수",palette="Set2", data=df_Test, linewidth=2.5, edgecolor=".2");
     plt.title(objective_list[0].professor.professor.major+' 시험 비율') #차트에 제목 붙이기
-    outputfile_name = dir_static+everytime_data[0].professor.professor.major+" bar_chart_professor_Test.png"
+    outputfile_name = dir_static+each_Professor[0].professor.professor.major+" bar_chart_professor_Test.png"
     plt.savefig(outputfile_name)
     plt.show()
 
