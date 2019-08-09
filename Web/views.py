@@ -21,7 +21,6 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
-from django.utils.encoding import force_bytes
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_text
@@ -50,13 +49,15 @@ def activate(request, uid64, token):
 	uid = force_text(urlsafe_base64_decode(uid64))
 	try:
 		user = User.objects.get(pk=uid)
-	except Exception:
-		return HttpResponse('비정상적인 접근입니다.')
+	except Exception as e:
+		print(e)
+		return HttpResponse('비정상적인 접근입니다.[uid]')
 	if user is not None and account_activation_token.check_token(user, token):
 		user.is_active = True
 		user.save()
-		auth.login(request, user)
-		return redirect('/main')
+		#auth.login(request, user) #인증되면 바로 로그인하는 것으로부터
+		#return redirect('/main') #인증되면 바로 메인페이지로 이동하는것으로부터
+		return redirect('/login') #로그인 페이지로 이동하는 것으로 변경함.
 	else:
 		return HttpResponse('비정상적인 접근입니다.')
 
