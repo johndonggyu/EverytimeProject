@@ -27,13 +27,13 @@ from PIL import Image
 #===========================================#
 #               global variables            #
 #===========================================#
-dir_static = './frontend/static/chart/'
+dir_static = './Web/static/chart/'
 #===========================================#
 
 sns.set(style="whitegrid", context="talk")
 rs = np.random.RandomState(8)
 
-font_name = font_manager.FontProperties(fname="./raw_data/fonts/malgun.ttf").get_name()
+font_name = font_manager.FontProperties(fname="./modules/raw_data/fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 style.use('ggplot')
 
@@ -63,6 +63,8 @@ def get_tokens(match_, match2_):
 
 #########################################################
 #######################실제 파일 실행 부분 ###############
+#objective_list 만드는 코드 -> objective list : 각 교수님 마다 모든 수업 객체 데이터를 객체리스트로 받아오는 리스트.    
+
 #smu_professor 에서 이름, 학과 꺼내오기.
     #for yo in smu_professor.objects.all():
 each_Professor_classess = list()
@@ -260,53 +262,7 @@ def get_tokens_for_charts(each_Professor): #추후 구현 type_ =3, match_ = 한
 #5  출결 어떤지 계산 변수 attendanceMix attendanceDirect  attendanceDesignated attendanceElectronic attendanceNone , index [11-15]
 #6. 시험 횟수 많은지 계산 변수 test4above test3 test2 test1 testNone , index [16-20]
 
-def draw_chart_professor_assignment(each_Professor):
-    alist = get_tokens_for_charts(each_Professor)
-    if type(alist) == type(int):
-        if alist <= 0:
-            print('db가 비었습니다 : draw_chart_professor_assignment()')
-            return 0
-    #2. 과제 비율 계산 변수 assignmentMany assignmentNorm assignmentNone , index [1-3]
-    y1_value = (alist[1], alist[2], alist[3])
-    x_name =('많음', '보통', '없음')
-    n_groups = len(x_name)
-    index = np.arange(n_groups)
-    bar_width=0.4
-    opacity = 0.5
-
-    plt.bar(index, y1_value, bar_width, tick_label=x_name, align='center', alpha=opacity, color='b', label='과제비율')
-    plt.xlabel('과제 분량')
-    plt.ylabel('학생 응답 수(명)', position =(0.5,0.5), horizontalalignment='center', verticalalignment='top')
-    plt.title(each_Professor[0].professor_professor_professor+' 과제 분량') #차트에 제목 붙이기
-    plt.xlim(-1, n_groups)
-    plt.ylim(0,11)
-    outputfile_name = dir_static+each_Professor[0].professor_professor_professor+"assignment.png"
-    plt.savefig(outputfile_name)
-     #차트 이미지로 저장하기
-    #plt.show()
-
-def draw_chart_professor_assignment(each_Professor):
-    alist = get_tokens_for_charts(each_Professor)
-    if type(alist) == type(int):
-        if alist <= 0:
-            print('db가 비었습니다 : draw_chart_professor_assignment()')
-            return 0
-    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-
-    labels = '많음', '보통','없음'
-    #labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
-    #3. 조모임 계산 변수 team_projectMany team_projectNorm  team_projectNone , index [4-6]
-    sizes = [alist[4], alist[5], alist[6]]
-    explode = (0, 0, 0.1)  # only "explode" the 3rd slice (i.e. '없음')
-
-    fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',shadow=True, startangle=90)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    outputfile_name = dir_static+"bar_chart_professor_team_project.png"
-    plt.savefig(outputfile_name)
-     #차트 이미지로 저장하기
-    #plt.show()
-
+#해당 차트는 파이차트지만 사용되지 않는 코드
 def draw_piechart_assignment_and_teamProject(each_Professor):
     alist = get_tokens_for_charts(each_Professor)
     if type(alist) == type(int):
@@ -354,6 +310,7 @@ def draw_piechart_assignment_and_teamProject(each_Professor):
     plt.savefig('./frontend/static/chart/ex_pieplot.png', format='png', dpi=400)
     #plt.show()
 
+#여기부터 실제 실행되는 코드 
 def draw_barPlot_professor_Assignment(each_Professor):
     alist = get_tokens_for_charts(each_Professor)
     if type(alist) == type(int):

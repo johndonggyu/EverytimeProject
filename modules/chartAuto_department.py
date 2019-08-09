@@ -30,13 +30,13 @@ from PIL import Image
 #===========================================#
 #               global variables            #
 #===========================================#
-dir_static = './frontend/static/chart/'
+dir_static = './Web/static/chart/'
 #===========================================#
 
 sns.set(style="whitegrid", context="talk")
 rs = np.random.RandomState(8)
 
-font_name = font_manager.FontProperties(fname="./raw_data/fonts/malgun.ttf").get_name()
+font_name = font_manager.FontProperties(fname="./modules/raw_data/fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 style.use('ggplot')
 
