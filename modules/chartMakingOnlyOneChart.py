@@ -1,9 +1,10 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "home.settings")
 import django
-django.setup()
 import sys
-from backend.parsed_data.models import lecture_evaluation, Eval, smu_professor, lecture_time, professor_keyword
+sys.path.append('..')
+django.setup()
+from Web.models import lecture_evaluation, Eval, smu_professor, lecture_time, professor_keyword
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -27,13 +28,13 @@ from PIL import Image
 #===========================================#
 #               global variables            #
 #===========================================#
-dir_static = './Web/static/chart/'
+dir_static = '../Web/static/chart/'
 #===========================================#
 
 sns.set(style="whitegrid", context="talk")
 rs = np.random.RandomState(8)
 
-font_name = font_manager.FontProperties(fname="./modules/raw_data/fonts/malgun.ttf").get_name()
+font_name = font_manager.FontProperties(fname="./raw_data/fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 style.use('ggplot')
 
@@ -138,9 +139,9 @@ def draw_barPlot_professor_Assignment(each_Professor):
             return 0
     list_assignment= [int(i) for i in alist]
     ds_assignment=[
-        {'설문조사':1, '과제':'많음', '학생 응답 수':list_assignment[1]},
-        {'설문조사':2, '과제':'보통', '학생 응답 수':list_assignment[2]},
-        {'설문조사':3, '과제':'없음', '학생 응답 수':list_assignment[3]}
+        {'설문조사':1, '과제':'많음', '학생 응답 수':list_assignment[0]},
+        {'설문조사':2, '과제':'보통', '학생 응답 수':list_assignment[1]},
+        {'설문조사':3, '과제':'없음', '학생 응답 수':list_assignment[2]}
                     ]
     df_assignment = pd.DataFrame(ds_assignment)
     sns.barplot(x="과제", y="학생 응답 수",palette="Set2", data=df_assignment, linewidth=2.5, edgecolor=".2");
@@ -148,7 +149,7 @@ def draw_barPlot_professor_Assignment(each_Professor):
     outputfile_name = dir_static+each_Professor[0].professor.professor.professor+" assignment.png"
     plt.savefig(outputfile_name)
      #차트 이미지로 저장하기
-    #plt.show()
+    plt.show()
 
 #-----------------------------------------------------------------------------------
 for i in range(0, len(objective_list)):

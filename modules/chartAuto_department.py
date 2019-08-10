@@ -1,9 +1,11 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "home.settings")
+import sys
+sys.path.append('..')
 import django
 django.setup()
 import sys
-from backend.parsed_data.models import lecture_evaluation, Eval, smu_professor, lecture_time, professor_keyword
+from Web.models import lecture_evaluation, Eval, smu_professor, lecture_time, professor_keyword
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -30,13 +32,13 @@ from PIL import Image
 #===========================================#
 #               global variables            #
 #===========================================#
-dir_static = './Web/static/chart/'
+dir_static = '../Web/static/chart/'
 #===========================================#
 
 sns.set(style="whitegrid", context="talk")
 rs = np.random.RandomState(8)
 
-font_name = font_manager.FontProperties(fname="./modules/raw_data/fonts/malgun.ttf").get_name()
+font_name = font_manager.FontProperties(fname="./raw_data/fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 style.use('ggplot')
 

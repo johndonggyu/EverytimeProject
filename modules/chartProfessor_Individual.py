@@ -1,9 +1,10 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "home.settings")
+import sys
+sys.path.append('..')
 import django
 django.setup()
-import sys
-from backend.parsed_data.models import lecture_evaluation, Eval, smu_professor, lecture_time, professor_keyword
+from Web.models import lecture_evaluation, Eval, smu_professor, lecture_time, professor_keyword
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -27,13 +28,13 @@ from PIL import Image
 #===========================================#
 #               global variables            #
 #===========================================#
-dir_static = './Web/static/chart/'
+dir_static = '../Web/static/chart/'
 #===========================================#
 
 sns.set(style="whitegrid", context="talk")
 rs = np.random.RandomState(8)
 
-font_name = font_manager.FontProperties(fname="./modules/raw_data/fonts/malgun.ttf").get_name()
+font_name = font_manager.FontProperties(fname="./raw_data/fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 style.use('ggplot')
 
@@ -63,7 +64,7 @@ def get_tokens(match_, match2_):
 
 #########################################################
 #######################실제 파일 실행 부분 ###############
-#objective_list 만드는 코드 -> objective list : 각 교수님 마다 모든 수업 객체 데이터를 객체리스트로 받아오는 리스트.    
+#objective_list 만드는 코드 -> objective list : 각 교수님 마다 모든 수업 객체 데이터를 객체리스트로 받아오는 리스트.
 
 #smu_professor 에서 이름, 학과 꺼내오기.
     #for yo in smu_professor.objects.all():
@@ -310,7 +311,7 @@ def draw_piechart_assignment_and_teamProject(each_Professor):
     plt.savefig('./frontend/static/chart/ex_pieplot.png', format='png', dpi=400)
     #plt.show()
 
-#여기부터 실제 실행되는 코드 
+#여기부터 실제 실행되는 코드
 def draw_barPlot_professor_Assignment(each_Professor):
     alist = get_tokens_for_charts(each_Professor)
     if type(alist) == type(int):
