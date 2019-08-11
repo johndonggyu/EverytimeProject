@@ -1,0 +1,9 @@
+새로운 모듈을 설치했습니다.
+conda activate EverytimeProject이후에
+pip install django-chartjs
+django-chartjs 모듈 설치해주세요 ~
+
+같은 같은 이유로
+setting.py 내
+INSTALLED_APPS에
+'chartjs' 추가했습니다.

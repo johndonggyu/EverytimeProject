@@ -152,5 +152,8 @@ def draw_barPlot_professor_Assignment(each_Professor):
     plt.show()
 
 #-----------------------------------------------------------------------------------
+#실제 코드 제작 하는 코드 부분.
+
+
 for i in range(0, len(objective_list)):
     draw_barPlot_professor_Assignment(objective_list[i])

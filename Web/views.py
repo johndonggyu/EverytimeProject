@@ -10,7 +10,7 @@ from datetime import datetime
 import urllib
 from django.conf import settings
 
-from nltk.tokenize import word_tokenize 
+from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from collections import Counter
 import requests
@@ -29,6 +29,9 @@ from django.contrib import auth
 # Create your views here.
 def home(request):
 	return render(request, 'login.html')
+
+#ChartJS 사용위해 importing.
+
 
 def main(request):
 	_colleges = colleges.objects.all()
@@ -117,7 +120,7 @@ class loGin(View):
 		response = HttpResponse("<script>alert('ID/PW가 틀렸습니다. 다시 입력해주세요.');history.back(-1);</script>")
 		userID = request.POST['userid']
 		userPW = request.POST['password']
-		
+
 		user = authenticate(request, username=userID, password=userPW)
 
 		if user is None:
@@ -153,7 +156,7 @@ def individual(request,dept,pname):
 		bcnt = Eval.objects.filter(comment_prof__professor__professor__major=dept,comment_prof__professor__professor__professor=pname).count()
 		## kwdcnt ==> wordcloud
 		kwdcnt = professor_keyword.objects.filter(major=dept,professor=pname).count()
-			
+
 		p = smu_professor.objects.get(professor=pname,major=dept)
 		ppic = p.picture
 		pinfo = p.information
@@ -185,7 +188,7 @@ def individual(request,dept,pname):
 		wc_path = settings.STATIC_URL+"wc/"+ pname + "-" + dept + y + ".png"
 		## month : wordcloud가 몇월달 건지. 이것도 자동으로 한달 전으로
 
-		
+
 
 		return render(request, 'professor_individual.html', {
 			'pname1' : pname,
@@ -205,7 +208,7 @@ def us(request):
 	return render(request, 'us.html')
 
 def comment(request):
-	return render(request, 'comment.html')	
+	return render(request, 'comment.html')
 
 def userinfo(request):
 	return render(request, 'userinfo.html')
@@ -344,7 +347,7 @@ def major(request, dept):
 		print('something went wrong')
 		#return render_to_response('myView.html')
 		return render(request, 'department_profiling.html')
-	
+
 
 def word_cloud(request, blog_id):
 	try:
@@ -389,7 +392,7 @@ def fpw1(request):
 	return render(request, 'fpw1.html')
 
 def fpw2(request):
-	return render(request, 'fpw2.html')	
+	return render(request, 'fpw2.html')
 
 def change_pw(request):
     context= {}
@@ -410,3 +413,5 @@ def change_pw(request):
         context.update({'error':"현재 비밀번호가 일치하지 않습니다."})
 
     return render(request, "./main3.html",context)
+
+#ChartJS Experiment
