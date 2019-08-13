@@ -23,3 +23,5 @@
 .dump Web_professor_keyword
 .output Web_search_major.sql
 .dump Web_search_major
+.output Web_smu_professor.sql
+.dump Web_smu_professor
