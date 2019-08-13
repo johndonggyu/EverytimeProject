@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+#비밀번호 초기화
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -46,8 +48,16 @@ urlpatterns = [
     path('word_cloud/<str:blog_id>', views.word_cloud, name='word_cloud'),
     path('word_cloud/<str:major_id>/<str:pf_id>', views.word_cloud2, name='word_cloud2'),
     path('error/', views.error, name='error'),
-    path('fpw1/', views.fpw1, name='fpw1'),
+    path('fpw1/', views.fpw1.as_view(), name='fpw1'),
     path('fpw2/', views.fpw2, name='fpw2'),
+    path(
+        'change-password/',
+        auth_views.PasswordChangeView.as_view(
+            template_name='./change-password.html',
+            success_url = '/'
+        ),
+        name='change_password'
+    ),
 
 ]
 

@@ -1,11 +1,7 @@
 {% extends "base2.html" %}
 {% load staticfiles %}
 {% block content %}
-{% if user.is_authenticated %}
-<script>location.href="../main";</script>
-</head>
-</html>
-{% else %}
+
 
 <body class="body_login">
 		<div class="background">
@@ -16,17 +12,18 @@
 						<div class="col-xs-6 col-md-4">
 						</div>
 						<div class="col-xs-6 col-md-4">
-							<div class="checkout-cart" style="height: 250px; background-color: #ffffff" >
+							<div class="checkout-cart" style="height: 300px; background-color: #ffffff" >
 							<div class="login-section-header">
-						<h3>비밀번호 찾기</h3>
+							<h3>비밀번호 찾기</h3>
 							</div>
-							<form action="../login/" method="post">
+							<form action="../fpw1/" method="post">
 							{% csrf_token %}
 							<input type="text" placeholder="이메일을 입력하세요" style="width:100%" name="userid">
 							<br>
 							</form> 
 							<!-- <h6 style="text-align: left">아이디를 잊어버리셨나요?   <a href="#">FIND ID</a></h6> -->
-							<button type="submit" class="btn btn-outline-dark" style="width:100%" onclick="return confirm('등록한 이메일로 인증 이메일이 전송되었습니다. 이메일을 확인해주시기 바랍니다.')">이메일 찾기</button>
+					<!-- 		<button type="submit" class="btn btn-outline-dark" style="width:100%" onclick="return alert('등록한 이메일로 인증 이메일이 전송되었습니다. 이메일을 확인해주시기 바랍니다.')">이메일 찾기</button> -->
+							<button type="submit" class="btn btn-outline-dark" style="width:100%" >비밀번호 찾기</button>
 						</div>
 						</div>
 						<div class="col-xs-6 col-md-4">
@@ -40,5 +37,4 @@
 		<!-- login section end -->
 
 
-{% endif %}
 {% endblock %}

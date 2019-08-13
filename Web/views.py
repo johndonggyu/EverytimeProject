@@ -26,6 +26,8 @@ from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_text
 from django.contrib import auth
+#비밀번호 찾기 
+from django.contrib.auth.hashers import check_password
 
 # Create your views here.
 def home(request):
@@ -61,6 +63,26 @@ def activate(request, uid64, token):
 		return redirect('/main')
 	else:
 		return HttpResponse('비정상적인 접근입니다.')
+
+def fpw2(request):
+    context= {}
+    if request.method == "post":
+        current_password = request.POST.get("origin_password")
+        user = request.user
+        if check_password(current_password,user.password):
+            new_password = request.POST.get("password1")
+            password_confirm = request.POST.get("password2")
+            if new_password == password_confirm:
+                user.set_password(new_password)
+                user.save()
+                auth.login(request,user)
+                return redirect('/main')
+            else:
+                context.update({'error':"새로운 비밀번호를 다시 확인해주세요."})
+    else:
+        context.update({'error':"현재 비밀번호가 일치하지 않습니다."})
+
+    return render(request, "fpw2.html",context)
 
 class join(View):
 	#userID = '';
@@ -107,6 +129,51 @@ class join(View):
 		return render(request, 'join.html')
 			#response = HttpResponse("<script>alert('회원가입 되었습니다.');window.close();</script>")
 			#return response
+class fpw1(View):
+	#userID = '';
+	def get(self, request, *args, **kwargs):
+		#userID = request.POST['userid']
+		return render(request, 'fpw1.html')
+	def post(self, request, *args, **kwargs):
+		condition = False
+		response = HttpResponse("<script>alert('ID가 틀렸습니다. 다시 입력해주세요.');history.back(-1);</script>")
+		userID = request.POST['userid']
+
+		try:
+			User.objects.get(username=userID)
+		except ObjectDoesNotExist:
+			condition = True
+		
+		if not condition:
+			return response
+		else:
+			response = HttpResponse("<script>location.href='../fpw1/'</script>")
+			user.save()
+			current_site = get_current_site(request)
+			#localhost:8000
+			message = render_to_string('activate_email.html', {
+				'user':user,
+				'domain':current_site.domain,
+				'uid':urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+				'token': account_activation_token.make_token(user),
+			})
+			mail_subject = "[상명타임즈] 아이디 인증 메일입니다."
+			user_email = user.username
+			email = EmailMessage(mail_subject, message, to=[user_email])
+			email.send()
+			return HttpResponse(
+			    '<div style="font-size: 40px; width: 100%; height:100%; display:flex; text-align:center; '
+			    'justify-content: center; align-items: center;">'
+			    '입력하신 이메일로 인증 링크가 전송되었습니다.'
+			    '</div>'
+			)
+			return redirect('/fpw2')
+		return render(request, 'fpw1.html')
+
+
+# def fpw1(request):
+# 	return render(request, 'fpw1.html')
+
 class loGin(View):
 	def get(self, request, *args, **kwargs):
 		return render(request, 'login.html')
@@ -382,28 +449,3 @@ def word_cloud4(request, major_id):
 def error(request):
 	return render(request, '404.html')
 
-def fpw1(request):
-	return render(request, 'fpw1.html')
-
-def fpw2(request):
-	return render(request, 'fpw2.html')	
-
-def change_pw(request):
-    context= {}
-    if request.method == "POST":
-        current_password = request.POST.get("origin_password")
-        user = request.user
-        if check_password(current_password,user.password):
-            new_password = request.POST.get("password1")
-            password_confirm = request.POST.get("password2")
-            if new_password == password_confirm:
-                user.set_password(new_password)
-                user.save()
-                auth.login(request,user)
-                return redirect("./main3.html")
-            else:
-                context.update({'error':"새로운 비밀번호를 다시 확인해주세요."})
-    else:
-        context.update({'error':"현재 비밀번호가 일치하지 않습니다."})
-
-    return render(request, "./main3.html",context)

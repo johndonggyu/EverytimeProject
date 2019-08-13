@@ -626,12 +626,23 @@ login section
 	margin-top:10px;
 	margin-bottom: 10px;
 }
-.login-section h2 {
+.login-section h2,h3{
 	text-align: center; 
 	padding: 40px;
 }
-.login-section a{
-	font-size: 10px;
+.login-section h3{
+	text-align: center; 
+	padding: 20px;
+}
+.login-section h6{
+	text-align: left;
+}
+.login-section div{
+	text-align: left;
+	font-weight:  bold;
+}
+.login-section div a{
+	font-size: 15px;
 	color:#f51167;
 }
 
