@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import include, path
 #비밀번호 초기화
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import (
+    PasswordResetView,PasswordResetDoneView, PasswordResetConfirmView,PasswordResetCompleteView,
+)
 from . import views
 
 urlpatterns = [
@@ -54,6 +57,12 @@ urlpatterns = [
         ),
         name='change_password'
     ),
+    # Forget Password
+    path('password_reset/', PasswordResetView.as_view(success_url='done/'), name="password_reset"),
+    path('password_reset/done/', PasswordResetDoneView.as_view(), name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view( success_url='/reset/done/'), name="password_reset_confirm"),
+    path('reset/done/', PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+
 
 ]
 

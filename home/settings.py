@@ -31,6 +31,8 @@ EMAIL_HOST_PASSWORD = 'everytime1234!@#$'
 EMAIL_USE_TLS = True
 # TLS 보안 방법
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+#추가
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
 #############
 
