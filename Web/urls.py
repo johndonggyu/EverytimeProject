@@ -44,6 +44,12 @@ urlpatterns = [
     path('error/', views.error, name='error'),
     path('fpw1/', views.fpw1, name='fpw1'),
     path('fpw2/', views.fpw2, name='fpw2'),
+    path('chart1/<str:dept>/<str:pname>', views.chart1, name='chart1'),
+    path('chart2/<str:dept>/<str:pname>', views.chart2, name='chart2'),
+    path('chart3/<str:dept>/<str:pname>', views.chart3, name='chart3'),
+    path('chart4/<str:dept>/<str:pname>', views.chart4, name='chart4'),
+    path('chart5/<str:dept>/<str:pname>', views.chart5, name='chart5'),
+    path('chart6/<str:dept>/<str:pname>', views.chart6, name='chart6'),
 
 ]
 
