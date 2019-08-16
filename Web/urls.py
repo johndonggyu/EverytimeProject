@@ -19,7 +19,7 @@ from django.urls import include, path
 #비밀번호 초기화
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import (
-    PasswordResetView,PasswordResetDoneView, PasswordResetConfirmView,PasswordResetCompleteView,
+    PasswordChangeView, PasswordChangeDoneView, PasswordResetView,PasswordResetDoneView, PasswordResetConfirmView,PasswordResetCompleteView,
 )
 from . import views
 
@@ -49,19 +49,44 @@ urlpatterns = [
     path('error/', views.error, name='error'),
     path('fpw1/', views.fpw1.as_view(), name='fpw1'),
     path('fpw2/', views.fpw2, name='fpw2'),
-    path(
-        'change-password/',
-        auth_views.PasswordChangeView.as_view(
-            template_name='./change-password.html',
-            success_url = '/'
-        ),
-        name='change_password'
-    ),
+    # path(
+    #     'change_password/',
+    #     auth_views.PasswordChangeView.as_view(
+    #         template_name='./change-password.html',
+    #         success_url = '/'
+    #     ),
+    #     name='change_password'
+    # ),
+    path('password_change/', PasswordChangeView.as_view( 
+        template_name='./change-password.html',
+        success_url='/password_change/done/'), name="password_change"),
+    path('password_change/done/', PasswordChangeDoneView.as_view( 
+        template_name='./password_change_done.html'),name="password_change_done"),
+
+
+
+
     # Forget Password
-    path('password_reset/', PasswordResetView.as_view(success_url='done/'), name="password_reset"),
-    path('password_reset/done/', PasswordResetDoneView.as_view(), name="password_reset_done"),
-    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view( success_url='/reset/done/'), name="password_reset_confirm"),
-    path('reset/done/', PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+    path('password_reset/', PasswordResetView.as_view(
+        # template_name='./password_reset_form.html',
+        success_url='/password_reset/done/',
+        # subject_template_name='./password_reset_subject.txt',
+        # email_template_name='./password_reset_email.html',
+        #success_url='/login/'
+        ),
+        name='password_reset'),
+    # path('password_reset/', PasswordResetView.as_view(
+    #     template_name='./password_reset_form.html',
+    #     success_url='password_reset/done/'), name="password_reset"),
+    path('password_reset/done/', PasswordResetDoneView.as_view(
+       ), name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view( 
+        template_name='./password_reset_confirm.html',
+        success_url='/reset/done/'), 
+        name="password_reset_confirm"),
+    path('reset/done/', PasswordResetCompleteView.as_view(
+        template_name='./password_reset_complete.html'
+        ), name="password_reset_complete"),
 
 
 ]
