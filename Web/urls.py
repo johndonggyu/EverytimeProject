@@ -66,18 +66,18 @@ urlpatterns = [
 
 
 
-    # Forget Password
+    # # Forget Password
     path('password_reset/', PasswordResetView.as_view(
-        # template_name='./password_reset_form.html',
+        template_name='./password_reset_form.html',
         success_url='/password_reset/done/',
-        # subject_template_name='./password_reset_subject.txt',
-        # email_template_name='./password_reset_email.html',
+        subject_template_name='./password_reset_subject.txt',
+        email_template_name='./password_reset_email.html',
         #success_url='/login/'
         ),
         name='password_reset'),
-    # path('password_reset/', PasswordResetView.as_view(
-    #     template_name='./password_reset_form.html',
-    #     success_url='password_reset/done/'), name="password_reset"),
+    path('password_reset/', PasswordResetView.as_view(
+         template_name='./password_reset_form.html',
+         success_url='password_reset/done/'), name="password_reset"),
     path('password_reset/done/', PasswordResetDoneView.as_view(
        ), name="password_reset_done"),
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view( 
@@ -87,6 +87,12 @@ urlpatterns = [
     path('reset/done/', PasswordResetCompleteView.as_view(
         template_name='./password_reset_complete.html'
         ), name="password_reset_complete"),
+
+        # Forget Password
+    # path('password_reset/', PasswordResetView.as_view(success_url='done/'), name="password_reset"),
+    # path('password_reset/done/', PasswordResetDoneView.as_view(), name="password_reset_done"),
+    # path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view( success_url='/reset/done/'), name="password_reset_confirm"),
+    # path('reset/done/', PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 
 
 ]
