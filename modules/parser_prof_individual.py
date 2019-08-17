@@ -32,51 +32,53 @@ def eval_crawling(s, data, m):
 	e = ET.fromstring(gangyipyeong.text)
 	for board_ in e.iter('lecture'):
 		try:
-			#print(board.attrib)
-			id = board_.attrib['id']
-			#print(id) #게시물 id 
+			## 서울캠퍼스 필터링
+			if board_.attrib['campus_name'].strip() == '서울캠퍼스':
+				#print(board.attrib)
+				id = board_.attrib['id']
+				#print(id) #게시물 id 
 
-			board_src = "https://everytime.kr/find/lecture/article/list?school_id=13&limit_num=200&lecture_id="
-			link = board_src + id
+				board_src = "https://everytime.kr/find/lecture/article/list?school_id=13&limit_num=200&lecture_id="
+				link = board_src + id
 
-			## 과목 강의평가 정보 가져오기
-			post_one = s.get(link)
-			e2 = ET.fromstring(post_one.text)
+				## 과목 강의평가 정보 가져오기
+				post_one = s.get(link)
+				e2 = ET.fromstring(post_one.text)
 
-			## 강의평 lecture, rate, details
-			post = e2.find('./lecture')
-			lect_name = post.attrib['name']
-			prof_name = post.attrib['professor']
-			
-			post = e2.find('./rate')
-			rate = post.text
-			
-			post = e2.find('./details')
-			grade = post.attrib['assessment_grade']
-			homework = post.attrib['assessment_homework']
-			team = post.attrib['assessment_team']
-			attendance = post.attrib['assessment_attendance']
-			exam_times = post.attrib['exam_times']
+				## 강의평 lecture, rate, details
+				post = e2.find('./lecture')
+				lect_name = post.attrib['name']
+				prof_name = post.attrib['professor']
+				
+				post = e2.find('./rate')
+				rate = post.text
+				
+				post = e2.find('./details')
+				grade = post.attrib['assessment_grade']
+				homework = post.attrib['assessment_homework']
+				team = post.attrib['assessment_team']
+				attendance = post.attrib['assessment_attendance']
+				exam_times = post.attrib['exam_times']
 
-			contents = []
-			
-			cnt = 0
-			for p in e2.iter('article'):
-				contents.append(p.attrib['text'])
-				cnt += 1
+				contents = []
+				
+				cnt = 0
+				for p in e2.iter('article'):
+					contents.append(p.attrib['text'])
+					cnt += 1
 
-			data.append([])
-			data[i].append(lect_name)
-			data[i].append(prof_name)
-			data[i].append(rate)
-			data[i].append(grade)
-			data[i].append(homework)
-			data[i].append(team)
-			data[i].append(attendance)
-			data[i].append(exam_times)
-			#data[i].append([])
-			#data[i][8].append(contents)
-			data[i].append(contents)
+				data.append([])
+				data[i].append(lect_name)
+				data[i].append(prof_name)
+				data[i].append(rate)
+				data[i].append(grade)
+				data[i].append(homework)
+				data[i].append(team)
+				data[i].append(attendance)
+				data[i].append(exam_times)
+				#data[i].append([])
+				#data[i][8].append(contents)
+				data[i].append(contents)
 		except Exception as e:
 			print(e)
 			pass

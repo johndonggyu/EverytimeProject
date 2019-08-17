@@ -16,8 +16,17 @@
 			</div>
 			
 	<!-- Info section end-->
+	 <!-- DISQUS -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="box box-primary">
+            {% load disqus_tags %}
+            {% disqus_show_comments %}
+          </div>
+          <div class="col-lg-12"></div>
+        </div>
 				
-				<div class="col-lg-12">
+				<!-- <div class="col-lg-12">
 					<div class="box box-primary">
 						<form class="contact-form">
               				<div class="card-header">
@@ -37,7 +46,7 @@
                           <button class="btn" id="btn" type="submit"><img class="btn-img" onclick="return confirm('정말 삭제하시겠습니까?')" src="{% static 'img/cancel.png'%}"></button>
                         </td>
                       </tr>
-                      {% endfor %}
+                      {% endfor %} -->
                       <!-- <tr>
                         <td>
                           <h6 class="title">닉네임

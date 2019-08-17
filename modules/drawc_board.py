@@ -150,6 +150,15 @@ def draw_wordcloud(kkma_result, match_, _date):
 	plt.tight_layout(pad=0)
 	outputfile_name = dir_static + "wc/"+match_+".png"
 	plt.savefig(outputfile_name, bbox_inches='tight', edgecolor='none')
+def insertKeyword(result, _date):
+	if len(result) == 0:
+		print('게시판 : 리스트가 비어서 워드클라우드를 제작할 수 없음.')
+		print('아마 해당 월의 데이터가 없을 지도 모름.')
+		return
+	else:
+		print('게시판 : 워드클라우드를 제작 중 ')
+	count = Counter(result)
+	count_word(count, _date)
 ################################################################
 if __name__ == '__main__':
 	start_time = time.time()
@@ -182,7 +191,7 @@ if __name__ == '__main__':
 	elif(board_keyword.objects.filter(code=boardcode_).count() == 0):
 		print("키워드 테이블이 비었습니다. 바로 wordcloud 만들겠습니다.")
 		#draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
-		one_list(boardcode_, _date)
+		insertKeyword(one_list(boardcode_, _date), _date)
 	else:
 		tmp = board_keyword.objects.filter(code=boardcode_).order_by('-word_date').first()
 		if(str(tmp.word_date)[0:7] == _date[0:7]):
@@ -197,7 +206,7 @@ if __name__ == '__main__':
 				del_obj.filter(code=boardcode_).delete()
 				print("이미 만든 달의 데이터는 삭제되고 다시 추가됩니다.")
 				#draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
-				one_list(boardcode_, _date)
+				insertKeyword(one_list(boardcode_, _date), _date)
 
 	#draw_wordcloud(one_list(boardcode_), 'jagae')
 	#draw_wordcloud(one_list(1, '369474'), 'saenaegi')

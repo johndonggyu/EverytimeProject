@@ -1,0 +1,8 @@
+		{% autoescape off %}
+		    안녕하세요
+
+		    아래 링크를 클릭하면 이메일 인증이 완료됩니다.
+
+		    이메일 인증 링크 : http://{{ domain }}{% url 'activate' uid64=uid token=token %}
+
+		{% endautoescape %}

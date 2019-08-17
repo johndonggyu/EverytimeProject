@@ -31,6 +31,8 @@ EMAIL_HOST_PASSWORD = 'everytime1234!@#$'
 EMAIL_USE_TLS = True
 # TLS 보안 방법
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# #추가
+# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
 #############
 
@@ -61,7 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Web',
     'django.contrib.sites',
-    'disqus'
+    'disqus',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
 

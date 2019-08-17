@@ -24,7 +24,8 @@
 				<div class="col-lg-3 col-sm-6">
 					<div class="professor-dept">
 						<div class="pd-pic">
-							<img src="{{ p.picture }}" width="150" alt="">
+							<a href="/individual/{{major}}/{{p.professor}}">
+							<img src="{{ p.picture }}" width="150" alt=""></a>
 						</div>
 					</div>
 				</div>
@@ -43,9 +44,9 @@
 					</div>
 				</div>
 			{% endfor %}
-			<div class="text-center pt-5">
+			<!-- <div class="text-center pt-5">
 				<button class="site-btn sb-line sb-dark">LOAD MORE</button>
-			</div>
+			</div> -->
 		</div>
 	</section>
 	<!-- Product filter section end -->

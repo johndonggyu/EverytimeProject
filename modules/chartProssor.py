@@ -203,29 +203,6 @@ def draw_chart_professor_assignment():
         if alist <= 0:
             print('db가 비었습니다 : draw_chart_professor_assignment()')
             return 0
-    #2. 과제 비율 계산 변수 assignmentMany assignmentNorm assignmentNone , index [1-3]
-    y1_value = (alist[1], alist[2], alist[3])
-    x_name =('많음', '보통', '없음')
-    n_groups = len(x_name)
-    index = np.arange(n_groups)
-    bar_width=0.4
-    opacity = 0.5
-
-    plt.bar(index, y1_value, bar_width, tick_label=x_name, align='center', alpha=opacity, color='b', label='과제비율')
-    plt.xlabel('과제 분량')
-    plt.ylabel('학생 응답 수(명)', position =(0.5,0.5), horizontalalignment='center', verticalalignment='top')
-    plt.title('교수님 과제 분량') #차트에 제목 붙이기
-    plt.xlim(-1, n_groups)
-    plt.ylim(0,11)
-    plt.savefig('./frontend/static/chart/bar_chart_professor_assignment.png') #차트 이미지로 저장하기
-    plt.show()
-
-def draw_chart_professor_assignment():
-    alist = get_tokens()
-    if type(alist) == type(int):
-        if alist <= 0:
-            print('db가 비었습니다 : draw_chart_professor_assignment()')
-            return 0
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
 
     labels = '많음', '보통','없음'
