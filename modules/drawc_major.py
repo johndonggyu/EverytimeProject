@@ -149,6 +149,14 @@ def draw_wordcloud(kkma_result, match_):
 	plt.tight_layout(pad=0)
 	outputfile_name = dir_static + "wc/"+match_+str(datetime.now().year)+".png"
 	plt.savefig(outputfile_name, bbox_inches='tight', edgecolor='none')
+def insertKeyword(result, major):
+	if len(result) == 0:
+	#	print(str(major)+'리스트가 비어서 워드클라우드를 제작할 수 없음')
+		return
+	#else:
+	#	print(str(major)+'워드클라우드 제작 중')
+	count = Counter(result)
+	count_word(major, count)
 ################################################################
 if __name__ == '__main__':
 	start_time = time.time()
@@ -159,6 +167,6 @@ if __name__ == '__main__':
 	for i in major_synonym.objects.all():
 	#for i in major_synonym.objects.filter(major='계당교양교육원'):
 		#draw_wordcloud(one_list(i.major, i.synonym), i.major)
-		one_list(i.major, i.synonym)
+		insertKeyword(one_list(i.major, i.synonym), i.major)
 
 	print("--- %s seconds ---" % (time.time() - start_time))

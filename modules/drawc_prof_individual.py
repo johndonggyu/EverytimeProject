@@ -174,7 +174,7 @@ def draw_wordcloud(major, pname, kkma_result, match_):
 	global dir_mask
 	global dir_static
 	if len(kkma_result) == 0:
-		print(str(pname)+'리스트가 비어서 워드클라우드를 제작할 수 없습니다.')
+		print(str(major)+'-'+str(pname)+'리스트가 비어서 워드클라우드를 제작할 수 없습니다.')
 		return
 	else:
 		print("워드클라우드 제작 중 입니다.")
@@ -195,6 +195,14 @@ def draw_wordcloud(major, pname, kkma_result, match_):
 	plt.tight_layout(pad=0)
 	outputfile_name = dir_static + "wc/"+match_+".png"
 	plt.savefig(outputfile_name, bbox_inches='tight', edgecolor='none')
+def insertKeyword(major, pname, result):
+	if len(result) == 0:
+		print(str(major)+'-'+str(pname)+'리스트가 비어서, 워드클라우드를 제작할 수 없음.')
+		return
+	else:
+		print(str(major)+'-'+str(pname)+'워드클라우드 제작 중')
+	count = Counter(result)
+	count_word(major,pname,count)
 ################################################################
 if __name__ == '__main__':
 	start_time = time.time()
@@ -206,6 +214,6 @@ if __name__ == '__main__':
 	for yo in smu_professor.objects.all():
 	#for yo in smu_professor.objects.filter(major='컴퓨터과학과'):
 		#draw_wordcloud(yo.major, yo.professor, one_list(yo.professor, yo.major), yo.professor+'-'+yo.major+str(datetime.now().year))
-		one_list(yo.professor, yo.major)
+		insertKeyword(yo.professor, yo.major, one_list(yo.professor, yo.major))
 
 	print("--- %s seconds ---" % (time.time() - start_time))
