@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
-from .models import smu_professor, lecture_evaluation, lecture_time, board, major_keyword, board_keyword, Eval, professor_keyword, colleges,majors, major_ngram_keyword, ratingProfessor
+from .models import smu_professor, lecture_evaluation, lecture_time, board, major_keyword, board_keyword, Eval, professor_keyword, colleges,majors, major_ngram_keyword, ratingProfessor, ratingMajor, major_synonym
 from datetime import datetime
 import urllib
 from django.conf import settings
@@ -398,7 +398,7 @@ def major(request, dept):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	if(dept):
-		bcnt = board.objects.count()
+		bcnt = board.objects.filter(contents__contains=dept).count()
 		## kwdcnt ==> wordcloud
 		kwdcnt = major_keyword.objects.filter(major=dept).count()
 		## updated ==> wordcloud
@@ -507,19 +507,52 @@ def topProfessors(request):
 	except Exception as e:
 		print(e)
 		return HttpResponse("[]")
+## 인기 관련 초기화
 def initTops(request):
-	## 인기 교수님 초기화
+	# 인기 교수님 & 학과 초기화
 	try:
 		ratingProfessor.objects.all().delete()
+		ratingMajor.objects.all().delete()
+
 		b = smu_professor.objects.all()
 		for a in b:
 			bcnt = Eval.objects.filter(comment_prof__professor__professor__major=a.major,comment_prof__professor__professor__professor=a.professor).count()
 			kwdcnt = professor_keyword.objects.filter(major=a.major,professor=a.professor).count()
 			ratingProfessor(prof=a,countEval=bcnt,countKeyword=kwdcnt).save()
+		
+		d = majors.objects.all()
+		for c in d:
+			try:
+				e = major_synonym.objects.get(major=c.major)
+				majorList = e.synonym.split('|')
+				bcnt = 0
+				for majorSyn in majorList:
+					bcnt += board.objects.filter(contents__contains=majorSyn).count()
+				kwdcnt = major_keyword.objects.filter(major=c.major).count()
+				ratingMajor(major=c,countBoard=bcnt,countKeyword=kwdcnt).save()
+			except Exception as e:
+				print(e)
+				pass
 		return HttpResponse("초기화 완료")
 	except Exception as e:
 		print(e)
 		return HttpResponse("초기화 에러")
+## 메인페이지 인기 학과 5개
+def topMajors(request):
+	_colleges = colleges.objects.all()
+	_majors = majors.objects.all()
+	try:
+		topMajor = [{'major': bkey.major.major, 'count': bkey.countBoard + bkey.countKeyword} for bkey in ratingMajor.objects.order_by('-countBoard','-countKeyword')[:5]]
+		return HttpResponse(topMajor)
+		#return render(request, 'blahblahblah.html', {
+		#	'colleges' : _colleges,
+		#	'majors' : _majors,
+		#	'topMajor' : topMajor,
+		#	})
+	except Exception as e:
+		print(e)
+		return HttpResponse("[]")
+
 #OK_수정
 def error(request):
 	return render(request, '404.html')
