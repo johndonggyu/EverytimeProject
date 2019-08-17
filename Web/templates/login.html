@@ -28,8 +28,10 @@
 							<p style="text-align: left"><input type="checkbox">로그인 상태 유지</p>
 							<input type="submit" class="btn btn-outline-dark" style="width:100%" value="로그인">
 							</form> 
-							<!-- <h6 style="text-align: left">아이디를 잊어버리셨나요?   <a href="#">FIND ID</a></h6> -->
-							<h6 style="text-align: left">비밀번호를 잊어버리셨나요?   <a href="#">FIND PASSWORD</a></h6>
+							<h6>비밀번호를 잊어버리셨나요?</h6>
+							<div>
+							<a href="{% url 'password_reset'%}">비밀번호 찾기</a>
+							</div>
 							<button onclick="nwindow()" type="submit" class="btn btn-outline-dark" style="width:100%" >회원가입</button>
 						</div>
 						</div>
