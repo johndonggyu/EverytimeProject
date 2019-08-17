@@ -476,7 +476,30 @@ def word_cloud4(request, major_id):
 	except Exception as e:
 		print(e)
 		return HttpResponse("[]")
-
+## 메인페이지 인기 키워드 10개
+def topKeywords(request):
+	_colleges = colleges.objects.all()
+	_majors = majors.objects.all()
+	try:
+		keywords = [{'text': bkey.keyword, 'count': bkey.count} for bkey in board_keyword.objects.all().order_by('-count')[:10]]
+		return HttpResponse(keywords)
+		#return render(request, 'blahblahblah.html', {
+		#	'colleges' : _colleges,
+		#	'majors' : _majors,
+		#	'keywords' : keywords,
+		#	})
+	except Exception as e:
+		print(e)
+		return HttpResponse("[]")
+## 메인페이지 인기 교수님 3명
+def topProfessors(request):
+	_colleges = colleges.objects.all()
+	_majors = majors.objects.all()
+	try:
+		pass
+	except Exception as e:
+		print(e)
+		return HttpResponse("[]")
 #OK_수정
 def error(request):
 	return render(request, '404.html')

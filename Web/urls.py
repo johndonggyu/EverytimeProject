@@ -69,6 +69,8 @@ urlpatterns = [
     path('password_change/done/', PasswordChangeDoneView.as_view( 
         template_name='./password_change_done.html'),name="password_change_done"),
 
+    ## Main Page Top Keywords
+    path('topKeywords/', views.topKeywords, name='topKeywords'),
 
 
 
