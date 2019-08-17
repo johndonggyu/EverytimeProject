@@ -497,7 +497,7 @@ def topProfessors(request):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	try:
-		topProf = [{'text': bkey.prof.professor, 'count': bkey.countEval + bkey.countKeyword} for bkey in ratingProfessor.objects.order_by('-countEval','-countKeyword')[:3]]
+		topProf = [{'professor': bkey.prof.professor, 'count': bkey.countEval + bkey.countKeyword} for bkey in ratingProfessor.objects.order_by('-countEval','-countKeyword')[:3]]
 		return HttpResponse(topProf)
 		#return render(request, 'blahblahblah.html', {
 		#	'colleges' : _colleges,
