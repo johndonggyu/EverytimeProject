@@ -12,7 +12,7 @@
 html,
 body {
 	height: 100%;
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Titillium Web', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
@@ -792,6 +792,66 @@ join section
 	top:1px;
 }
 
+/* ----------------
+  password-reset
+---------------------*/
+
+.password-reset .btns li{
+	display:inline-block;
+	margin:0 4px;
+	font-size:12px;
+	
+}
+.password-reset .btn {
+	-moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+	-webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+	box-shadow:inset 0px 39px 0px -24px #e67a73;
+	background-color:#e4685d;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.password-reset .btn:hover {
+	background-color:#eb675e;
+}
+.password-reset .btn:active {
+	position:relative;
+	top:1px;
+}
+.password-reset .back {
+	-moz-box-shadow:inset 0px 39px 0px -24px #ffffff;
+	-webkit-box-shadow:inset 0px 39px 0px -24px #ffffff;
+	box-shadow:inset 0px 39px 0px -24px #ffffff;
+	background-color:#ededed;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.password-reset .back:hover {
+	background-color:#dfdfdf;
+}
+.password-reset .back:active {
+	position:relative;
+	top:1px;
+}
 
 
 /* ----------------
