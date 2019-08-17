@@ -64,7 +64,6 @@ INSTALLED_APPS = [
     'Web',
     'django.contrib.sites',
     'disqus',
-    'chartjs',
 ]
 
 MIDDLEWARE = [
