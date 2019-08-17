@@ -214,6 +214,6 @@ if __name__ == '__main__':
 	for yo in smu_professor.objects.all():
 	#for yo in smu_professor.objects.filter(major='컴퓨터과학과'):
 		#draw_wordcloud(yo.major, yo.professor, one_list(yo.professor, yo.major), yo.professor+'-'+yo.major+str(datetime.now().year))
-		insertKeyword(yo.professor, yo.major, one_list(yo.professor, yo.major))
+		insertKeyword(yo.major, yo.professor, one_list(yo.professor, yo.major))
 
 	print("--- %s seconds ---" % (time.time() - start_time))
