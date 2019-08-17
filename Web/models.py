@@ -159,3 +159,14 @@ class major_synonym(models.Model):
 
 	def __str__(self):
 		return self.major
+
+class ratingProfessor(models.Model):
+	prof = models.ForeignKey(smu_professor, on_delete=models.CASCADE, null=True)
+	countEval = models.IntegerField(null=True)
+	countKeyword = models.IntegerField(null=True)
+
+	class Meta:
+		ordering = ['-countEval','-countKeyword']
+
+	def __str__(self):
+		return self.prof.professor + "(" + self.prof.major + ")"

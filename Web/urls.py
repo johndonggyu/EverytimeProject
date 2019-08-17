@@ -71,8 +71,9 @@ urlpatterns = [
 
     ## Main Page Top Keywords
     path('topKeywords/', views.topKeywords, name='topKeywords'),
-
-
+    ## initTops는 인기교수님DB 초기화하는 기능임
+    path('initTops/', views.initTops, name='initTops'),
+    path('topProfessors/', views.topProfessors, name='topProfessors'),
 
     # # Forget Password
     path('password_reset/', PasswordResetView.as_view(

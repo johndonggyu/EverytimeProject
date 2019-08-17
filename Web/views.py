@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.db.models import Count
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
-from .models import smu_professor, lecture_evaluation, lecture_time, board, major_keyword, board_keyword, Eval, professor_keyword, colleges,majors, major_ngram_keyword
+from .models import smu_professor, lecture_evaluation, lecture_time, board, major_keyword, board_keyword, Eval, professor_keyword, colleges,majors, major_ngram_keyword, ratingProfessor
 from datetime import datetime
 import urllib
 from django.conf import settings
@@ -481,7 +482,7 @@ def topKeywords(request):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	try:
-		keywords = [{'text': bkey.keyword, 'count': bkey.count} for bkey in board_keyword.objects.all().order_by('-count')[:10]]
+		keywords = [{'professor': bkey.keyword, 'count': bkey.count} for bkey in board_keyword.objects.all().order_by('-count')[:10]]
 		return HttpResponse(keywords)
 		#return render(request, 'blahblahblah.html', {
 		#	'colleges' : _colleges,
@@ -496,10 +497,29 @@ def topProfessors(request):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	try:
-		pass
+		topProf = [{'text': bkey.prof.professor, 'count': bkey.countEval + bkey.countKeyword} for bkey in ratingProfessor.objects.order_by('-countEval','-countKeyword')[:3]]
+		return HttpResponse(topProf)
+		#return render(request, 'blahblahblah.html', {
+		#	'colleges' : _colleges,
+		#	'majors' : _majors,
+		#	'topProf' : topProf,
+		#	})
 	except Exception as e:
 		print(e)
 		return HttpResponse("[]")
+def initTops(request):
+	## 인기 교수님 초기화
+	try:
+		ratingProfessor.objects.all().delete()
+		b = smu_professor.objects.all()
+		for a in b:
+			bcnt = Eval.objects.filter(comment_prof__professor__professor__major=a.major,comment_prof__professor__professor__professor=a.professor).count()
+			kwdcnt = professor_keyword.objects.filter(major=a.major,professor=a.professor).count()
+			ratingProfessor(prof=a,countEval=bcnt,countKeyword=kwdcnt).save()
+		return HttpResponse("초기화 완료")
+	except Exception as e:
+		print(e)
+		return HttpResponse("초기화 에러")
 #OK_수정
 def error(request):
 	return render(request, '404.html')

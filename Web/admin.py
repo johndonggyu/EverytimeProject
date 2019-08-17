@@ -2,7 +2,7 @@
 ## paresd_data/admin.py
 from django.contrib import admin
 ## models에서 EverytimeDAta를 import 해준다.
-from .models import board, Eval, lecture_evaluation, board_keyword, professor_keyword, major_keyword, lecture_time, smu_professor, search_major, major_synonym, colleges, majors, major_ngram_keyword
+from .models import board, Eval, lecture_evaluation, board_keyword, professor_keyword, major_keyword, lecture_time, smu_professor, search_major, major_synonym, colleges, majors, major_ngram_keyword, ratingProfessor
 ## 아래의 코드를 입력하면 EverytimeData를 admin 페이지에서 관리할 수 있다.
 class boardAdmin(admin.ModelAdmin):
 	list_display = ['code','title','contents','date']
@@ -78,3 +78,9 @@ class majorsAdmin(admin.ModelAdmin):
 	list_filter = ['college']
 	search_fields = ['major','college__college']
 admin.site.register(majors,majorsAdmin)
+class ratingProfessorAdmin(admin.ModelAdmin):
+	list_display = ['prof','countEval','countKeyword']
+	list_display_links = ['prof']
+	list_filter = ['prof__major']
+	search_fields = ['prof__professor','prof__major']
+admin.site.register(ratingProfessor,ratingProfessorAdmin)
