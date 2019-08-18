@@ -58,19 +58,14 @@
               <div class="section-title">
                   <h3> WORLDCLOUD </h3>
               </div>
-              {% comment %}
-              <div class="bf-pic">
-              	{% if wc_ng3_path %}
-                  <img src="{{ wc_ng3_path }}"  alt="">
-                {% endif %}
-              </div>
-              {% endcomment %}
-              {% if wc_ng3_path %}
               <center>
-              <div id="n_word_cloud">
-              </div>
-          		</center>
-              {% endif %}
+				{% if kwdcnt == 0 %}
+				<img src="{{ wc_ng3_path }}"  alt="">
+				{% else %}
+				<div id="n_word_cloud">
+				</div>
+				{% endif %}
+				</center>
             </div>
           </div>
           <div class="col-xs-6 col-md-1">
@@ -84,19 +79,14 @@
               <div class="section-title">
                   <h3> WORLDCLOUD </h3>
               </div>
-              {% comment %}
-              <div class="bf-pic">
-              	{% if wc_path %}
-                  <img src="{{  wc_path }}"  alt="">
-                {% endif %}
-              </div>
-              {% endcomment %}
-              {% if wc_path %}
               <center>
-              <div id="word_cloud">
-               				</div>
-               </center>
-              {% endif %}
+				{% if kwdcnt == 0 %}
+				<img src="{{ wc_path }}"  alt="">
+				{% else %}
+				<div id="word_cloud">
+				</div>
+				{% endif %}
+				</center>
             </div>
           </div>
           <div class="col-xs-6 col-md-1">

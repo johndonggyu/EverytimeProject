@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->
 	<link href="{% static 'img/favicon.ico'%}" rel="shortcut icon"/>
-<!-- {% if user.is_authenticated %} -->
+{% if user.is_authenticated %}
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
@@ -178,14 +178,12 @@
 	<script src="{% static 'js/main.js'%}"></script>
 	<script src="{% static 'js/jqcloud.min.js'%}"></script>
 	<script src="{% static 'js/script.js'%}"></script>
-	
-
 	</body>
 </html>
 {% else %}
 <script type="text/javascript">
 	alert('로그인하세요.');
-	location.href='../login';
+	location.href='/login';
 </script>
 </head>
 </html>

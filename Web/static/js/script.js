@@ -60,19 +60,23 @@ $(document).ready(function () {
   	 }});
    	$.ajax({url: '/word_cloud/mn/'+major_id, success: function (data) {
         var words_data = $.parseJSON(data);
-        
-        $('#n_word_cloud').jQCloud(words_data, {
-           shape : 'elliptic', //rectangular
-           autoResize : true,
-           center : {x:0.5,y:0.5},
-           width: 500,
-           height: 500,
-           //colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
-           fontSize: {
-             from: 0.2,
-             to: 0.04
-           },
-        });
+        if (words_data.length == 0){
+        	$('#n_word_cloud')[0].innerHTML = '<img src="/static/img/nodata.png">';
+        }
+        else{
+	        $('#n_word_cloud').jQCloud(words_data, {
+	           shape : 'elliptic', //rectangular
+	           autoResize : true,
+	           center : {x:0.5,y:0.5},
+	           width: 500,
+	           height: 500,
+	           //colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
+	           fontSize: {
+	             from: 0.2,
+	             to: 0.04
+	           },
+	        });
+    	}
   	 }});
    }
    
