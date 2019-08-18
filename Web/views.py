@@ -722,56 +722,10 @@ def chart(request, dept, pname):
 		tokens.append(test2)
 		tokens.append(test1)
 		tokens.append(testNone)
-		return render(request, 'chart.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'averageScore' : tokens[0],
-			'assignmentMany' : tokens[1],
-			'assignmentNorm' : tokens[2],
-			'assignmentNone' : tokens[3],
-			'team_projectMany' : tokens[4],
-			'team_projectNorm' : tokens[5],
-			'team_projectNone' : tokens[6],
-			'creditGod' : tokens[7],
-			'creditProportion' : tokens[8],
-			'creditTough' : tokens[9],
-			'creditFbomb' : tokens[10],
-			'attendanceMix' : tokens[11],
-			'attendanceDirect' : tokens[12],
-			'attendanceDesignated' : tokens[13],
-			'attendanceElectronic' : tokens[14],
-			'attendanceNone' : tokens[15],
-			'test4above' : tokens[16],
-			'test3' : tokens[17],
-			'test2' : tokens[18],
-			'test1' : tokens[19],
-			'testNone' : tokens[20],
-			})
+		json_list = []
+		chart_json = [{'averageScore': tokens[0], 'assignmentMany': tokens[1], 'assignmentNorm': tokens[2],'assignmentNone': tokens[3],'team_projectMany': tokens[4],'team_projectNorm': tokens[5],'team_projectNone': tokens[6],'creditGod': tokens[7],'creditProportion': tokens[8],'creditTough': tokens[9],'creditFbomb': tokens[10],'attendanceMix': tokens[11],'attendanceDirect': tokens[12],'attendanceDesignated': tokens[13],'attendanceElectronic': tokens[14],'attendanceNone': tokens[15],'test4above': tokens[16],'test3': tokens[17],'test2': tokens[18],'test1': tokens[19],'testNone': tokens[20] }]
+		return HttpResponse(json.dumps(chart_json))
 	except Exception as e:
 		print(e)
 		print('something went wrong')
-		return render(request, 'chart.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'averageScore' : 0,
-			'assignmentMany' : 0,
-			'assignmentNorm' : 0,
-			'assignmentNone' : 0,
-			'team_projectMany' : 0,
-			'team_projectNorm' : 0,
-			'team_projectNone' : 0,
-			'creditGod' : 0,
-			'creditProportion' : 0,
-			'creditTough' : 0,
-			'creditFbomb' : 0,
-			'attendanceMix' : 0,
-			'attendanceDirect' : 0,
-			'attendanceDesignated' : 0,
-			'attendanceElectronic' : 0,
-			'attendanceNone' : 0,
-			'test4above' : 0,
-			'test3' : 0,
-			'test2' : 0,
-			'test1' : 0,
-			'testNone' : 0,
-			})
+		return HttpResponse("[]")
