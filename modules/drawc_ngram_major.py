@@ -85,7 +85,7 @@ if __name__ == '__main__':
 			hakgua = m.college.college
 		elif len(hakgua) < 2:
 			continue
-		print('학과: '+str(hakgua))
+		#print('학과: '+str(hakgua))
 		if(len(hakgua) > 1):
 			s = search_major.objects.filter(major=hakgua)
 			# s.board_number 로 하면 게시물을 알 수 있음
