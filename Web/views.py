@@ -291,7 +291,6 @@ def individual(request,dept,pname):
 			'kwdcnt' : kwdcnt,
 			'updated' : updated,
 			't10kwd' : t10kwd,
-			'wc_path' : wc_path,
 			'ppic' : ppic,
 			'pinfo' : pinfo,
 			'colleges' : _colleges,
@@ -354,11 +353,7 @@ def bbs(request,blog_id):
 	y = str(datetime.now().year)
 	m = str(datetime.now().month - 1)
 
-	wc_path = settings.STATIC_URL+"wc/"+ bcode_file + y + optstr + m + ".png"
-	## month : wordcloud가 몇월달 건지. 이것도 자동으로 한달 전으로
-
 	#현재 달보다 한달 전으로 자동 설정하게 하기.
-	#month = 6
 	month = datetime.now().month - 1
 
 	return render(request, 'bbs.html', {
@@ -367,7 +362,6 @@ def bbs(request,blog_id):
 		'kwdcnt' : kwdcnt,
 		'updated' : updated,
 		't10kwd' : t10kwd,
-		'wc_path' : wc_path,
 		'month' : month,
 		'colleges' : _colleges,
 		'majors' : _majors,
@@ -398,7 +392,15 @@ def major(request, dept):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	if(dept):
-		bcnt = board.objects.filter(contents__contains=dept).count()
+		try:
+			e = major_synonym.objects.get(major=dept)
+			majorList = e.synonym.split('|')
+			bcnt = 0
+			for majorSyn in majorList:
+				bcnt += board.objects.filter(contents__contains=majorSyn).count()
+		except Exception as e:
+			print(e)
+			pass
 		## kwdcnt ==> wordcloud
 		kwdcnt = major_keyword.objects.filter(major=dept).count()
 		## updated ==> wordcloud
@@ -422,10 +424,6 @@ def major(request, dept):
 		## wc_path : wordcloud 이미지 경로
 		y = str(datetime.now().year)
 		#m = str(datetime.now().month - 1)
-		wc_path = settings.STATIC_URL+"wc/"+ dept + y + ".png"
-		wc_ng3_path = settings.STATIC_URL+"wc/"+ dept + "Ng3_" + y + ".png"
-		## month : wordcloud가 몇월달 건지. 이것도 자동으로 한달 전으로
-
 		return render(request, 'department_profiling.html', {
 			'colleges' : _colleges,
 			'majors' : _majors,
@@ -434,8 +432,6 @@ def major(request, dept):
 			'kwdcnt' : kwdcnt,
 			'updated' : updated,
 			't10kwd' : t10kwd,
-			'wc_path' : wc_path,
-			'wc_ng3_path' : wc_ng3_path,
 			})
 	else:
 		print('something went wrong')
