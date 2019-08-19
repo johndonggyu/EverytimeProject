@@ -29,7 +29,7 @@
             <div class="feature-icon">
               <img src="{% static 'img/icons/2.png'%}" alt="#">
             </div>
-            <h6>키워드 개수 : {{kwdcnt}} </h6>
+            <h4>키워드 개수 : {{kwdcnt}} </h4>
           </div>
         </div>
         <div class="col-md-4 p-0 feature">
@@ -37,7 +37,7 @@
             <div class="feature-icon">
               <img src="{% static 'img/icons/3.png'%}" alt="#">
             </div>
-            <h4>최근 업데이트 날짜 : {{updated|date:"Y-m-d h:m"}} </h4>
+            <h6>최근 업데이트 날짜 : {{updated|date:"Y-m-d h:m"}} </h6>
           </div>
         </div>
       </div>
@@ -105,7 +105,6 @@
 
       <!-- 학과 프로파일링 워드클라우드 끝 -->
       
-      <!-- 학과 통계분석자료 시작 -->
       <!-- 학과 통계분석자료 시작 -->
       <div class="row">
           <div class="col-xs-6 col-md-1">
@@ -210,9 +209,10 @@
               </div>
           </div>
         </div>
+         {% endif %}
         <!-- 학과 통계분석자료 끝 -->
          <!-- 학과 감성분석 시작 -->
-              {% endif %}
+             
         <div class="col-xs-6 col-md-1">
         </div>
       </div>
