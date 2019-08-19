@@ -138,7 +138,7 @@ class join(View):
 			user.save()
 			current_site = get_current_site(request)
 			#localhost:8000
-			uid = urlsafe_base64_encode(force_bytes(user.pk)).decode().encode()
+			uid = urlsafe_base64_encode(force_bytes(user.pk))#.decode().encode()
 			token = account_activation_token.make_token(user)
 			message = render_to_string('user_activate_email.html', {
 				'user':user,
