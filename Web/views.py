@@ -138,7 +138,7 @@ class join(View):
 			user.save()
 			current_site = get_current_site(request)
 			#localhost:8000
-			uid = urlsafe_base64_encode(force_bytes(user.pk)).decode()
+			uid = urlsafe_base64_encode(force_bytes(user.pk)).decode().encode()
 			token = account_activation_token.make_token(user)
 			message = render_to_string('user_activate_email.html', {
 				'user':user,
@@ -268,7 +268,7 @@ def individual(request,dept,pname):
 				'kwdcnt' : 0,
 				'updated' : '',
 				't10kwd' : 0,
-				'wc_path' : 0,
+				'wc_path' : '/static/img/nodata.png',
 				'ppic' : ppic,
 				'pinfo' : pinfo,
 				'colleges' : _colleges,
@@ -291,7 +291,6 @@ def individual(request,dept,pname):
 			'kwdcnt' : kwdcnt,
 			'updated' : updated,
 			't10kwd' : t10kwd,
-			'wc_path' : wc_path,
 			'ppic' : ppic,
 			'pinfo' : pinfo,
 			'colleges' : _colleges,
@@ -334,7 +333,7 @@ def bbs(request,blog_id):
 			'kwdcnt':0,
 			'updated':0,
 			't10kwd' : 0,
-			'wc_path' : '#',
+			'wc_path' : '/static/img/nodata.png',
 			'month' : 0,
 			'colleges' : _colleges,
 			'majors' : _majors,
@@ -354,11 +353,7 @@ def bbs(request,blog_id):
 	y = str(datetime.now().year)
 	m = str(datetime.now().month - 1)
 
-	wc_path = settings.STATIC_URL+"wc/"+ bcode_file + y + optstr + m + ".png"
-	## month : wordcloud가 몇월달 건지. 이것도 자동으로 한달 전으로
-
 	#현재 달보다 한달 전으로 자동 설정하게 하기.
-	#month = 6
 	month = datetime.now().month - 1
 
 	return render(request, 'bbs.html', {
@@ -367,7 +362,6 @@ def bbs(request,blog_id):
 		'kwdcnt' : kwdcnt,
 		'updated' : updated,
 		't10kwd' : t10kwd,
-		'wc_path' : wc_path,
 		'month' : month,
 		'colleges' : _colleges,
 		'majors' : _majors,
@@ -398,7 +392,15 @@ def major(request, dept):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	if(dept):
-		bcnt = board.objects.filter(contents__contains=dept).count()
+		try:
+			e = major_synonym.objects.get(major=dept)
+			majorList = e.synonym.split('|')
+			bcnt = 0
+			for majorSyn in majorList:
+				bcnt += board.objects.filter(contents__contains=majorSyn).count()
+		except Exception as e:
+			print(e)
+			pass
 		## kwdcnt ==> wordcloud
 		kwdcnt = major_keyword.objects.filter(major=dept).count()
 		## updated ==> wordcloud
@@ -414,18 +416,14 @@ def major(request, dept):
 				'kwdcnt' : 0,
 				'updated' : 0,
 				't10kwd' : 0,
-				'wc_path' : 0,
-				'wc_ng3_path' : 0,
+				'wc_path' : '/static/img/nodata.png',
+				'wc_ng3_path' : '/static/img/nodata.png',
 			})
 		## t10kwd ==> wordcloud
 		t10kwd = major_keyword.objects.filter(major=dept).order_by('-count')[:10]
 		## wc_path : wordcloud 이미지 경로
 		y = str(datetime.now().year)
 		#m = str(datetime.now().month - 1)
-		wc_path = settings.STATIC_URL+"wc/"+ dept + y + ".png"
-		wc_ng3_path = settings.STATIC_URL+"wc/"+ dept + "Ng3_" + y + ".png"
-		## month : wordcloud가 몇월달 건지. 이것도 자동으로 한달 전으로
-
 		return render(request, 'department_profiling.html', {
 			'colleges' : _colleges,
 			'majors' : _majors,
@@ -434,8 +432,6 @@ def major(request, dept):
 			'kwdcnt' : kwdcnt,
 			'updated' : updated,
 			't10kwd' : t10kwd,
-			'wc_path' : wc_path,
-			'wc_ng3_path' : wc_ng3_path,
 			})
 	else:
 		print('something went wrong')
@@ -584,7 +580,7 @@ def change_pw(request):
     return render(request, "./main3.html",context)
 
 #ChartJS Experiment
-def chart1(request, dept, pname):
+def chart(request, dept, pname):
 	#교수님 평점 계산
 	try:
 		match_lect = lecture_time.objects.filter(professor__professor=pname,professor__major=dept)
@@ -610,8 +606,33 @@ def chart1(request, dept, pname):
 		#카운트 올릴 변수들 초기화
 		nOfclasses=0
 		#교수님 총점 평균 계산
-		sumScore = 0
-		averageScore =0
+		sumScore=0
+		averageScore=0
+		#카운트 올릴 변수들 초기화
+		assignmentMany=0
+		assignmentNorm=0
+		assignmentNone=0
+		#조모임 계산 변수
+		team_projectMany=0
+		team_projectNorm=0
+		team_projectNone=0
+		#학점 비율 계산 변수
+		creditGod = 0
+		creditProportion = 0
+		creditTough = 0
+		creditFbomb = 0
+		#출결 어떤지 계산 변수
+		attendanceMix=0
+		attendanceDirect=0
+		attendanceDesignated=0
+		attendanceElectronic=0
+		attendanceNone=0
+		 #시험 횟수 많은지 계산 변수
+		test4above=0
+		test3=0
+		test2=0
+		test1=0
+		testNone=0
 		#함수 중요 변수 및 메서드
 		everytime_data = c 
 		#교수님 평균 별점 계산하는 함수
@@ -626,53 +647,6 @@ def chart1(request, dept, pname):
 			sumScore += floatScore1
 		averageScore = sumScore / nOfclasses #교수님 평균 별점
 		tokens.append(averageScore)
-		return render(request, 'chart1.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'averageScore' : tokens[0],
-			})
-	except Exception as e:
-		print(e)
-		print('something went wrong')
-		return render(request, 'chart1.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'averageScore' : 0,
-			})
-
-def chart2(request, dept, pname):
-	#교수님 과제 비율 계산
-	try:
-		match_lect = lecture_time.objects.filter(professor__professor=pname,professor__major=dept)
-		#교수님과 교수님 전공에 해당하는 시간표 객체에 들어있는 데이터 불러오기
-		match_eval = lecture_evaluation.objects.filter(professor__professor__professor=pname)
-		#교수님의 이름과 매치하는 강의 평가 데이터 가져오기
-		lect = []
-		for a in match_lect:
-			lect.append(a.lecture)
-			#lect에다가 교수님 시간표로부터 강의명만 가져오기
-		c = []
-		#print("---------------------")
-		for item in match_eval:
-			if(item.professor.lecture in lect):
-				#강의평가 데이터에 있는 강의명이 시간표로부터 가져온 강의명과 일치하다면?
-				c.append(item)
-				#이렇게 하면 일치하고 있는 강의명을 가진 강의 평가 데이터가 c라는 튜플에 추가 될것이다
-				#print(item.professor.lecture)
-				#실제로 해당 강의 평가 데이터들의 강의명이 들어가있는지 한번 확인해보자.
-		#print("---------------------")
-		#한 교수님이 강의하는 모든강의명의 제목이 c리스트에 들어가게 된다. 
-		tokens = list() #토큰을 리스트 형태로 생성
-		#카운트 올릴 변수들 초기화
-		assignmentMany = 0
-		assignmentNorm = 0
-		assignmentNone = 0
-		#함수 중요 변수 및 메서드
-		everytime_data = c 
-		#교수님 평균 별점 계산하는 함수
-		if len(everytime_data) <= 0:
-			print('db가 비었습니다 : from get_tokens()')
-			return 0
 		#교수님 과제분량 어떤지 확인하는 함수
 		for datum in everytime_data: #객체화 시킨 데이터들을 한줄씩 불러 읽음
 			strAssignment = datum.assignment #교수님 과제분량 많음?
@@ -685,56 +659,6 @@ def chart2(request, dept, pname):
 		tokens.append(assignmentMany)
 		tokens.append(assignmentNorm)
 		tokens.append(assignmentNone)
-		return render(request, 'chart2.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'assignmentMany' : tokens[0],
-			'assignmentNorm' : tokens[1],
-			'assignmentNone' : tokens[2],
-			})
-	except Exception as e:
-		print(e)
-		print('something went wrong')
-		return render(request, 'chart3.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'assignmentMany' : 0,
-			'assignmentNorm' : 0,
-			'assignmentNone' : 0,
-			})
-def chart3(request, dept, pname):
-	#교수님 팀플 비율 계산
-	try:
-		match_lect = lecture_time.objects.filter(professor__professor=pname,professor__major=dept)
-		#교수님과 교수님 전공에 해당하는 시간표 객체에 들어있는 데이터 불러오기
-		match_eval = lecture_evaluation.objects.filter(professor__professor__professor=pname)
-		#교수님의 이름과 매치하는 강의 평가 데이터 가져오기
-		lect = []
-		for a in match_lect:
-			lect.append(a.lecture)
-			#lect에다가 교수님 시간표로부터 강의명만 가져오기
-		c = []
-		#print("---------------------")
-		for item in match_eval:
-			if(item.professor.lecture in lect):
-				#강의평가 데이터에 있는 강의명이 시간표로부터 가져온 강의명과 일치하다면?
-				c.append(item)
-				#이렇게 하면 일치하고 있는 강의명을 가진 강의 평가 데이터가 c라는 튜플에 추가 될것이다
-				#print(item.professor.lecture)
-				#실제로 해당 강의 평가 데이터들의 강의명이 들어가있는지 한번 확인해보자.
-		#print("---------------------")
-		#한 교수님이 강의하는 모든강의명의 제목이 c리스트에 들어가게 된다. 
-		tokens = list() #토큰을 리스트 형태로 생성
-		#조모임 계산 변수
-		team_projectMany = 0
-		team_projectNorm = 0
-		team_projectNone = 0
-		#함수 중요 변수 및 메서드
-		everytime_data = c 
-		#교수님 평균 별점 계산하는 함수
-		if len(everytime_data) <= 0:
-			print('db가 비었습니다 : from get_tokens()')
-			return 0
 		#교수님 교수님 팀플이 평소에 많은지 확인하는 함수
 		for datum in everytime_data: #객체화 시킨 데이터들을 한줄씩 불러 읽음
 			strTeam_project = datum.team_project # 교수님 팀플 많이 내주심?
@@ -747,57 +671,6 @@ def chart3(request, dept, pname):
 		tokens.append(team_projectMany)
 		tokens.append(team_projectNorm)
 		tokens.append(team_projectNone)
-		return render(request, 'chart3.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'team_projectMany' : tokens[0],
-			'team_projectNorm' : tokens[1],
-			'team_projectNone' : tokens[2],
-			})
-	except Exception as e:
-		print(e)
-		print('something went wrong')
-		return render(request, 'chart3.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'team_projectMany' : 0,
-			'team_projectNorm' : 0,
-			'team_projectNone' : 0,
-			})
-def chart4(request, dept, pname):
-	#교수님 학점 비율 계산
-	try:
-		match_lect = lecture_time.objects.filter(professor__professor=pname,professor__major=dept)
-		#교수님과 교수님 전공에 해당하는 시간표 객체에 들어있는 데이터 불러오기
-		match_eval = lecture_evaluation.objects.filter(professor__professor__professor=pname)
-		#교수님의 이름과 매치하는 강의 평가 데이터 가져오기
-		lect = []
-		for a in match_lect:
-			lect.append(a.lecture)
-			#lect에다가 교수님 시간표로부터 강의명만 가져오기
-		c = []
-		#print("---------------------")
-		for item in match_eval:
-			if(item.professor.lecture in lect):
-				#강의평가 데이터에 있는 강의명이 시간표로부터 가져온 강의명과 일치하다면?
-				c.append(item)
-				#이렇게 하면 일치하고 있는 강의명을 가진 강의 평가 데이터가 c라는 튜플에 추가 될것이다
-				#print(item.professor.lecture)
-				#실제로 해당 강의 평가 데이터들의 강의명이 들어가있는지 한번 확인해보자.
-		#print("---------------------")
-		#한 교수님이 강의하는 모든강의명의 제목이 c리스트에 들어가게 된다. 
-		tokens = list() #토큰을 리스트 형태로 생성
-		#학점 비율 계산 변수
-		creditGod = 0
-		creditProportion = 0
-		creditTough = 0
-		creditFbomb = 0
-		#함수 중요 변수 및 메서드
-		everytime_data = c 
-		#교수님 평균 별점 계산하는 함수
-		if len(everytime_data) <= 0:
-			print('db가 비었습니다 : from get_tokens()')
-			return 0
 		#교수님 학점을 잘 주시는지 확인하는 함수
 		for datum in everytime_data: #객체화 시킨 데이터들을 한줄씩 불러 읽음
 			strCredit = datum.credit # 교수님 학점 잘주심? F폭격기임?
@@ -813,135 +686,24 @@ def chart4(request, dept, pname):
 		tokens.append(creditProportion)
 		tokens.append(creditTough)
 		tokens.append(creditFbomb)
-		return render(request, 'chart4.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'creditGod' : tokens[0],
-			'creditProportion' : tokens[1],
-			'creditTough' : tokens[2],
-			'creditFbomb' : tokens[3],
-			})
-	except Exception as e:
-		print(e)
-		print('something went wrong')
-		return render(request, 'chart4.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'creditGod' : 0,
-			'creditProportion' : 0,
-			'creditTough' : 0,
-			'creditFbomb' : 0,
-			})
-def chart5(request, dept, pname):
-	#교수님 출결 비율 계산
-	try:
-		match_lect = lecture_time.objects.filter(professor__professor=pname,professor__major=dept)
-		#교수님과 교수님 전공에 해당하는 시간표 객체에 들어있는 데이터 불러오기
-		match_eval = lecture_evaluation.objects.filter(professor__professor__professor=pname)
-		#교수님의 이름과 매치하는 강의 평가 데이터 가져오기
-		lect = []
-		for a in match_lect:
-			lect.append(a.lecture)
-			#lect에다가 교수님 시간표로부터 강의명만 가져오기
-		c = []
-		#print("---------------------")
-		for item in match_eval:
-			if(item.professor.lecture in lect):
-				#강의평가 데이터에 있는 강의명이 시간표로부터 가져온 강의명과 일치하다면?
-				c.append(item)
-				#이렇게 하면 일치하고 있는 강의명을 가진 강의 평가 데이터가 c라는 튜플에 추가 될것이다
-				#print(item.professor.lecture)
-				#실제로 해당 강의 평가 데이터들의 강의명이 들어가있는지 한번 확인해보자.
-		#print("---------------------")
-		#한 교수님이 강의하는 모든강의명의 제목이 c리스트에 들어가게 된다. 
-		tokens = list() #토큰을 리스트 형태로 생성
-		#출결 어떤지 계산 변수
-		attendanceMix = 0
-		attendanceDirect = 0
-		attendanceDesignated = 0
-		attendanceElectronic = 0
-		attendanceNone = 0
-		#함수 중요 변수 및 메서드
-		everytime_data = c 
-		#교수님 평균 별점 계산하는 함수
-		if len(everytime_data) <= 0:
-			print('db가 비었습니다 : from get_tokens()')
-			return 0
 		#교수님이 출결을 평소에 어떻게 부르시는가
 		for datum in everytime_data: #객체화 시킨 데이터들을 한줄씩 불러 읽음
 			strAttendance = datum.attendance #출결 체크는 어떻게 하시는가?
-		if strAttendance == '혼용':
-				attendanceMix+=1
-		elif strAttendance == '직접호명':
-				attendanceDirect+=1
-		elif strAttendance == '지정좌석':
-				attendanceDesignated+=1
-		elif strAttendance == '전자출결':
-				attendanceElectronic+=1
-		elif strAttendance == '반영안함':
-				attendanceNone+=1
+			if strAttendance == '혼용':
+					attendanceMix+=1
+			elif strAttendance == '직접호명':
+					attendanceDirect+=1
+			elif strAttendance == '지정좌석':
+					attendanceDesignated+=1
+			elif strAttendance == '전자출결':
+					attendanceElectronic+=1
+			elif strAttendance == '반영안함':
+					attendanceNone+=1
 		tokens.append(attendanceMix)
 		tokens.append(attendanceDirect)
 		tokens.append(attendanceDesignated)
 		tokens.append(attendanceElectronic)
 		tokens.append(attendanceNone)
-		return render(request, 'chart5.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'attendanceMix' : tokens[0],
-			'attendanceDirect' : tokens[1],
-			'attendanceDesignated' : tokens[2],
-			'attendanceElectronic' : tokens[3],
-			'attendanceNone' : tokens[4],
-			})
-	except Exception as e:
-		print(e)
-		print('something went wrong')
-		return render(request, 'chart5.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'attendanceMix' : 0,
-			'attendanceDirect' : 0,
-			'attendanceDesignated' : 0,
-			'attendanceElectronic' : 0,
-			'attendanceNone' : 0,
-			})
-
-def chart6(request, dept, pname):
-	#교수님 과제 비율 계산
-	try:
-		match_lect = lecture_time.objects.filter(professor__professor=pname,professor__major=dept)
-		#교수님과 교수님 전공에 해당하는 시간표 객체에 들어있는 데이터 불러오기
-		match_eval = lecture_evaluation.objects.filter(professor__professor__professor=pname)
-		#교수님의 이름과 매치하는 강의 평가 데이터 가져오기
-		lect = []
-		for a in match_lect:
-			lect.append(a.lecture)
-			#lect에다가 교수님 시간표로부터 강의명만 가져오기
-		c = []
-		#print("---------------------")
-		for item in match_eval:
-			if(item.professor.lecture in lect):
-				#강의평가 데이터에 있는 강의명이 시간표로부터 가져온 강의명과 일치하다면?
-				c.append(item)
-				#이렇게 하면 일치하고 있는 강의명을 가진 강의 평가 데이터가 c라는 튜플에 추가 될것이다
-				#print(item.professor.lecture)
-				#실제로 해당 강의 평가 데이터들의 강의명이 들어가있는지 한번 확인해보자.
-		#print("---------------------")
-		#한 교수님이 강의하는 모든강의명의 제목이 c리스트에 들어가게 된다. 
-		tokens = list() #토큰을 리스트 형태로 생성
-		 #시험 횟수 많은지 계산 변수
-		test4above = 0
-		test3 = 0
-		test2 = 0
-		test1 = 0
-		testNone = 0
-		#함수 중요 변수 및 메서드
-		everytime_data = c 
-		#교수님 평균 별점 계산하는 함수
-		if len(everytime_data) <= 0:
-			print('db가 비었습니다 : from get_tokens()')
-			return 0
 		#교수님 시험의 몇번 치루나요?
 		for datum in everytime_data: #객체화 시킨 데이터들을 한줄씩 불러 읽음
 			strTest = datum.test #교수님 시험의 몇번 치루나요?
@@ -960,22 +722,10 @@ def chart6(request, dept, pname):
 		tokens.append(test2)
 		tokens.append(test1)
 		tokens.append(testNone)
-		return render(request, 'chart6.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'test4above' : tokens[0],
-			'test3' : tokens[1],
-			'test2' : tokens[2],
-			'test1' : tokens[3],
-			'testNone' : tokens[4],
-			})
+		json_list = []
+		chart_json = [{'averageScore': tokens[0], 'assignmentMany': tokens[1], 'assignmentNorm': tokens[2],'assignmentNone': tokens[3],'team_projectMany': tokens[4],'team_projectNorm': tokens[5],'team_projectNone': tokens[6],'creditGod': tokens[7],'creditProportion': tokens[8],'creditTough': tokens[9],'creditFbomb': tokens[10],'attendanceMix': tokens[11],'attendanceDirect': tokens[12],'attendanceDesignated': tokens[13],'attendanceElectronic': tokens[14],'attendanceNone': tokens[15],'test4above': tokens[16],'test3': tokens[17],'test2': tokens[18],'test1': tokens[19],'testNone': tokens[20] }]
+		return HttpResponse(json.dumps(chart_json))
 	except Exception as e:
 		print(e)
 		print('something went wrong')
-		return render(request, 'chart6.html', {
-			'pname1' : pname,
-			'major1' : dept,
-			'assignmentMany' : 0,
-			'assignmentNorm' : 0,
-			'assignmentNone' : 0,
-			})
+		return HttpResponse("[]")

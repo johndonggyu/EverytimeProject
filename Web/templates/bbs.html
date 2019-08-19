@@ -59,14 +59,14 @@
 									<h3> WORDCLOUD </h3>
 									<p>{{ month }}월</p>
 							</div>
-							{% comment %}
-							<div class="bf-pic">
-									<img src="{{ wc_path }}"  alt="">
-							</div>
-							{% endcomment %}
 							<center>
+							{% if kwdcnt == 0 %}
+							<img src="{{ wc_path }}"  alt="">
+							{% else %}
 							<div id="word_cloud">
-               				</div></center>
+               				</div>
+               				{% endif %}
+               				</center>
 						</div>
 					</div>
 					<div class="col-xs-6 col-md-1">
