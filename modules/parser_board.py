@@ -141,13 +141,13 @@ if __name__ == '__main__':
 			temp = input()
 			if(temp == 1 or temp == "1"):
 				pool.map(save_data_board, parse_everytime(date, opt))
-		elif(tmp and str(tmp.date)[0:7] > date[0:7]):
-			print("이미 파싱한 월의 데이터가 더 최근달의 데이터입니다.\n그래도 파싱하시겠습니까? 예[1] 아니오[2]")
-			temp = input()
-			if(temp == 1 or temp == "1"):
-				pool.map(save_data_board, parse_everytime(date, opt))
+		#elif(tmp and str(tmp.date)[0:7] > date[0:7]):
+		#	print("이미 파싱한 월의 데이터가 더 최근달의 데이터입니다.\n그래도 파싱하시겠습니까? 예[1] 아니오[2]")
+		#	temp = input()
+		#	if(temp == 1 or temp == "1"):
+		#		pool.map(save_data_board, parse_everytime(date, opt))
 		else:
-			print("이전 날짜의 데이터가 DB에 있습니다.")
+			print("다른 날짜의 데이터가 DB에 있습니다.")
 			pool.map(save_data_board, parse_everytime(date, opt))
 	
 	#pool.map(save_data_board, parse_everytime(date, opt))
