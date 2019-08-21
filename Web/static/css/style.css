@@ -1164,17 +1164,17 @@ ul{
 	background: white;
 	height: 100%;
 	margin-top:20px;
-	border-radius: 20px;
+	border: solid 1px black;
 
 }
 
 .feature:nth-child(2) {
-	background: black;
+	
 	opacity: 1;
 }
 
 .feature:nth-child(2)  h4{
-	color: #ffffff;
+	color: black;
 }
 
 .feature .feature-inner {
@@ -1195,7 +1195,7 @@ ul{
 .feature .feature-icon {
 	display: inline-block;
 	margin-right: 15px;
-	width:35px;
+	width:3px;
 }
 
 .feature h2, h4, h5 {
@@ -1209,7 +1209,7 @@ ul{
 ------------------------*/
 
 .top-letest-product-section {
-
+	padding-bottom: 70px;
 }
 
 .top-letest-product-section .section-title {
@@ -1365,6 +1365,11 @@ ul{
 	padding-bottom: 60px;
 }
 
+.main-section .section-title {
+	margin-bottom: 10px;
+	/*border: solid 1px black ;*/
+}
+
 .product-filter-section .section-title {
 	margin-bottom: 40px;
 }
@@ -1372,7 +1377,7 @@ ul{
 	margin-top: 20px;
 	border: solid 1.5px #8f8f8f;
 	padding: 40px 38px 30px;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	opacity: 1;
 }
 
@@ -1685,14 +1690,24 @@ ul{
 .main-section{
 	margin-bottom: 50px;
 }
+/*.main-section .container{
+ 	width: 1600px;
+    margin: 0px auto;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
+}*/
 
 
 
 .info-widget{
 	margin-bottom: :200px;
 	border:solid 1px black;
-	max-width: 170px;
+	width: 170px;
+	height: 300px;
+	/*padding: 20px;*/
+    margin-bottom: 20px;
 	text-align: center;
+	float: left;
 }
 .info-widget img{
 	margin-top:20px;
@@ -2520,7 +2535,7 @@ ul{
 	margin-top: 20px;
 	border: solid 1.5px #8f8f8f;
 	padding: 40px 38px 30px;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	opacity: 1;
 }
 
@@ -2935,4 +2950,22 @@ ul{
 
 /*긁어옴 */
 
+}
+
+.gaemsung {
+    cursor: pointer;
+}
+.gaemsung_item {
+    position: absolute;
+    display: none;
+    background-color: #ffffff;
+    border: solid 2px #d0d0d0;
+    width: 350px;
+    height: 150px;
+    padding: 10px;
+}
+.gaemsung_item div {
+    position: absolute;
+    top: 5px;
+    right: 5px
 }

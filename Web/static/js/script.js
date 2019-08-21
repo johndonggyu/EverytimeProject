@@ -1,3 +1,5 @@
+var from_size = 0.2; //0.2
+var to_size = 0.04; //0.04
 $(document).ready(function () {
    var opt = location.href.split('/')[3];
    
@@ -14,8 +16,8 @@ $(document).ready(function () {
            height: 500,
            //colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
            fontSize: {
-             from: 0.2,
-             to: 0.04
+             from: from_size,
+             to: to_size
            },
         });
   	 }});
@@ -34,8 +36,8 @@ $(document).ready(function () {
            height: 500,
            //colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
            fontSize: {
-             from: 0.2,
-             to: 0.04
+             from: from_size,
+             to: to_size
            },
         });
   	 }});
@@ -423,8 +425,8 @@ $(document).ready(function () {
            height: 500,
            //colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
            fontSize: {
-             from: 0.2,
-             to: 0.04
+             from: from_size,
+             to: to_size
            },
         });
   	 }});
@@ -442,8 +444,8 @@ $(document).ready(function () {
 	           height: 500,
 	           //colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
 	           fontSize: {
-	             from: 0.2,
-	             to: 0.04
+	             from: 0.1,
+	             to: 0.02
 	           },
 	        });
     	}

@@ -138,7 +138,7 @@ class join(View):
 			user.save()
 			current_site = get_current_site(request)
 			#localhost:8000
-			uid = urlsafe_base64_encode(force_bytes(user.pk)).decode().encode()
+			uid = urlsafe_base64_encode(force_bytes(user.pk))#.decode().encode()
 			token = account_activation_token.make_token(user)
 			message = render_to_string('user_activate_email.html', {
 				'user':user,
@@ -310,6 +310,8 @@ def keyword(request):
 	return render(request, 'keyword.html')
 
 def bbs(request,blog_id):
+	year = '2019'
+	month = '01'
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	## bcode
@@ -325,7 +327,7 @@ def bbs(request,blog_id):
 	else:
 		bcode = "그냥 게시판"
 	## bcnt
-	bcnt = board.objects.filter(code=blog_id).count()
+	bcnt = board.objects.filter(code=blog_id,date__month=month).count()
 	if(bcnt == 0):
 		return render(request, 'bbs.html', {
 			'bcode':bcode,
@@ -339,22 +341,22 @@ def bbs(request,blog_id):
 			'majors' : _majors,
 			})
 	## kwdcnt ==> wordcloud
-	kwdcnt = board_keyword.objects.filter(code=blog_id).count()
+	kwdcnt = board_keyword.objects.filter(code=blog_id,word_date__year=year).filter(word_date__month=month).count()
 	## updated ==> wordcloud
 	a = board_keyword.objects.filter(code=blog_id).order_by('-word_date').last()
 	updated = a.word_date
 	## t10kwd ==> wordcloud
-	t10kwd = board_keyword.objects.filter(code=blog_id).order_by('-count')[:10]
+	t10kwd = board_keyword.objects.filter(code=blog_id,word_date__year=year).filter(word_date__month=month).order_by('-count')[:10]
 	## wc_path : wordcloud 이미지 경로
-	if(datetime.now().month - 1 < 10):
-		optstr = "-0"
-	else:
-		optstr = "-"
-	y = str(datetime.now().year)
-	m = str(datetime.now().month - 1)
+	#if(datetime.now().month - 1 < 10):
+	#	optstr = "-0"
+	#else:
+	#	optstr = "-"
+	#y = str(datetime.now().year)
+	#m = str(datetime.now().month - 1)
 
 	#현재 달보다 한달 전으로 자동 설정하게 하기.
-	month = datetime.now().month - 1
+	#month = datetime.now().month - 1
 
 	return render(request, 'bbs.html', {
 		'bcode' : bcode,
@@ -441,7 +443,9 @@ def major(request, dept):
 
 def word_cloud(request, blog_id):
 	try:
-		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "/"+bkey.keyword} for bkey in board_keyword.objects.filter(code=blog_id).order_by('-count')]
+		year = '2019' #월별에 대한 하드코딩
+		month = '01'
+		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "#"+bkey.keyword} for bkey in board_keyword.objects.filter(code=blog_id,word_date__year=year).filter(word_date__month=month).order_by('-count')]
 		# [dict, dict, dcit, ...]
 		return HttpResponse(json.dumps(words_json))
 	except Exception as e:
@@ -449,7 +453,7 @@ def word_cloud(request, blog_id):
 		return HttpResponse("[]")
 def word_cloud2(request, major_id, pf_id):
 	try:
-		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "/"+bkey.keyword} for bkey in professor_keyword.objects.filter(major=major_id,professor=pf_id).order_by('-count')]
+		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "#"+bkey.keyword} for bkey in professor_keyword.objects.filter(major=major_id,professor=pf_id).order_by('-count')]
 		# [dict, dict, dcit, ...]
 		return HttpResponse(json.dumps(words_json))
 	except Exception as e:
@@ -458,7 +462,7 @@ def word_cloud2(request, major_id, pf_id):
 def word_cloud3(request, major_id):
 	try:
 		#print('is this working?!??!?')
-		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "/"+bkey.keyword} for bkey in major_keyword.objects.filter(major=major_id).order_by('-count')]
+		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "#"+bkey.keyword} for bkey in major_keyword.objects.filter(major=major_id).order_by('-count')]
 		# [dict, dict, dcit, ...]
 		return HttpResponse(json.dumps(words_json))
 	except Exception as e:
@@ -467,7 +471,7 @@ def word_cloud3(request, major_id):
 def word_cloud4(request, major_id):
 	try:
 		#print('is this working?!??!?')
-		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "/"+bkey.keyword} for bkey in major_ngram_keyword.objects.filter(major=major_id).order_by('-count')]
+		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "#"+bkey.keyword} for bkey in major_ngram_keyword.objects.filter(major=major_id).order_by('-count')]
 		# [dict, dict, dcit, ...]
 		return HttpResponse(json.dumps(words_json))
 	except Exception as e:

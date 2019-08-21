@@ -106,22 +106,26 @@ def parse_everytime(pname):
 	return data
 
 def save_data_eval(everytime_data):
-	l = everytime_data[0]
-	p = everytime_data[1]
-	r = everytime_data[2]
-	g = everytime_data[3]
-	h = everytime_data[4]
-	t = everytime_data[5]
-	a = everytime_data[6]
-	e = everytime_data[7]
-	lt = lecture_time.objects.filter(lecture=l,professor__professor=p)
-	if(len(lt) > 0):
-		led = lecture_evaluation(professor=lt[0], 
-			score=r, assignment=h, team_project=t,
-			credit=g,attendance=a, test=e)
-		led.save()
-		for c in everytime_data[8]:
-			Eval(comment_prof=led, comment=c).save()
+	try:
+		l = everytime_data[0]
+		p = everytime_data[1]
+		r = everytime_data[2]
+		g = everytime_data[3]
+		h = everytime_data[4]
+		t = everytime_data[5]
+		a = everytime_data[6]
+		e = everytime_data[7]
+		lt = lecture_time.objects.filter(lecture=l,professor__professor=p)
+		if(len(lt) > 0):
+			led = lecture_evaluation(professor=lt[0], 
+				score=r, assignment=h, team_project=t,
+				credit=g,attendance=a, test=e)
+			led.save()
+			for c in everytime_data[8]:
+				Eval(comment_prof=led, comment=c).save()
+	except Exception as e:
+		print(e)
+		pass
 ## 이 명령어는 이 파일이 import가 아닌 python에서 직접 실행할 경우에만
 ## 아래 코드가 동작하도록 한다.
 if __name__ == '__main__':
