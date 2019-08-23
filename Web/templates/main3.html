@@ -8,7 +8,8 @@
 				<!-- <div class="col-lg-2 order-2 order-lg-1"> -->
 					<div class="info-widget">
 						<img src="{% static './img/main_user.png'%}">
-						<h3 class="fw-title">SMU</h3>
+						<h3 class="fw-title">{{ user }}      
+            </h3>
 						<button onclick="return infowindow()" type="submit" class=" btn btn-default" style="width:90% ">개인정보확인</button>
 						<button onclick="location.href='{% url 'password_change'%}'" type="submit" class=" btn btn-default" style="width:90%" >비밀번호 변경</button>
 					</div>
