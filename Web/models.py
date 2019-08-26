@@ -86,6 +86,8 @@ class board(models.Model):
 	title = models.CharField(null=True,default='',max_length=200)
 	contents = models.CharField(null=True,default='',max_length=1000)
 	date = models.DateTimeField(null=True,default='')
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 
 	class Meta:
 		ordering = ['-date']
@@ -150,6 +152,8 @@ class Eval(models.Model):
 	comment_number = models.AutoField(primary_key=True)
 	comment_prof = models.ForeignKey(lecture_evaluation, on_delete=models.CASCADE, null=True)
 	comment = models.CharField(null=True,default='',max_length=1000)
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 	def __str__(self):
 		return self.comment_prof.professor.professor.professor
 
