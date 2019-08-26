@@ -2951,3 +2951,21 @@ ul{
 /*긁어옴 */
 
 }
+
+.gaemsung {
+    cursor: pointer;
+}
+.gaemsung_item {
+    position: absolute;
+    display: none;
+    background-color: #ffffff;
+    border: solid 2px #d0d0d0;
+    width: 350px;
+    height: 150px;
+    padding: 10px;
+}
+.gaemsung_item div {
+    position: absolute;
+    top: 5px;
+    right: 5px
+}

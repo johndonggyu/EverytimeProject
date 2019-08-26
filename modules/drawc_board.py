@@ -96,8 +96,10 @@ def one_list(nid, _date):
 ##############################################################
 def count_word(count, _date):
 	# 해당 게시판 키워드의 데이터가 이미 있다면, 지우기.
-	if(board_keyword.objects.filter(code=boardcode_).count != 0):
-				board_keyword.objects.filter(code=boardcode_).delete()
+	year = _date[0:4]
+	month = _date[5:7]
+	if(board_keyword.objects.filter(code=boardcode_,word_date__year=year).filter(word_date__month=month).count != 0):
+				board_keyword.objects.filter(code=boardcode_,word_date__year=year).filter(word_date__month=month).delete()
 	
 	word = dict()
 	#상위 150개 단어 return
@@ -150,6 +152,15 @@ def draw_wordcloud(kkma_result, match_, _date):
 	plt.tight_layout(pad=0)
 	outputfile_name = dir_static + "wc/"+match_+".png"
 	plt.savefig(outputfile_name, bbox_inches='tight', edgecolor='none')
+def insertKeyword(result, _date):
+	if len(result) == 0:
+		print('게시판 : 리스트가 비어서 워드클라우드를 제작할 수 없음.')
+		print('아마 해당 월의 데이터가 없을 지도 모름.')
+		return
+	else:
+		print('게시판 : 워드클라우드를 제작 중 ')
+	count = Counter(result)
+	count_word(count, _date)
 ################################################################
 if __name__ == '__main__':
 	start_time = time.time()
@@ -164,10 +175,10 @@ if __name__ == '__main__':
 	else:
 		boardcode_ = sys.argv[2]
 
-	if(len(sys.argv) == 3):
-		raise Exception("파일명을 입력해주세요.")
-	else:
-		boardfile_ = sys.argv[3]
+	#if(len(sys.argv) == 3):
+	#	raise Exception("파일명을 입력해주세요.")
+	#else:
+	boardfile_ = 'none' #sys.argv[3]
 
 	if(len(_date) == 7):
 		opt = 1 #월별
@@ -177,12 +188,16 @@ if __name__ == '__main__':
 		raise Exception('잘못된 날짜 형식입니다.')
 
 	temp = 0
+
 	if(board.objects.filter(code=boardcode_).count() == 0):
 		print("크롤링을 먼저 진행 후 실행해주세요.")
 	elif(board_keyword.objects.filter(code=boardcode_).count() == 0):
 		print("키워드 테이블이 비었습니다. 바로 wordcloud 만들겠습니다.")
-		#draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
-		one_list(boardcode_, _date)
+		insertKeyword(one_list(boardcode_, _date), _date)
+		temp = 1
+	elif(sys.argv[3] == '-f'):
+		insertKeyword(one_list(boardcode_, _date), _date)
+		print('키워드 테이블에 삽입하였습니다.')
 	else:
 		tmp = board_keyword.objects.filter(code=boardcode_).order_by('-word_date').first()
 		if(str(tmp.word_date)[0:7] == _date[0:7]):
@@ -197,8 +212,8 @@ if __name__ == '__main__':
 				del_obj.filter(code=boardcode_).delete()
 				print("이미 만든 달의 데이터는 삭제되고 다시 추가됩니다.")
 				#draw_wordcloud(one_list(boardcode_, _date), boardfile_+_date, _date)
-				one_list(boardcode_, _date)
-
+				insertKeyword(one_list(boardcode_, _date), _date)
+	
 	#draw_wordcloud(one_list(boardcode_), 'jagae')
 	#draw_wordcloud(one_list(1, '369474'), 'saenaegi')
 	if(temp == 1 or temp == "1"):

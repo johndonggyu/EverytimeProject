@@ -86,6 +86,8 @@ class board(models.Model):
 	title = models.CharField(null=True,default='',max_length=200)
 	contents = models.CharField(null=True,default='',max_length=1000)
 	date = models.DateTimeField(null=True,default='')
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 
 	class Meta:
 		ordering = ['-date']
@@ -150,6 +152,8 @@ class Eval(models.Model):
 	comment_number = models.AutoField(primary_key=True)
 	comment_prof = models.ForeignKey(lecture_evaluation, on_delete=models.CASCADE, null=True)
 	comment = models.CharField(null=True,default='',max_length=1000)
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 	def __str__(self):
 		return self.comment_prof.professor.professor.professor
 
@@ -159,3 +163,25 @@ class major_synonym(models.Model):
 
 	def __str__(self):
 		return self.major
+
+class ratingProfessor(models.Model):
+	prof = models.ForeignKey(smu_professor, on_delete=models.CASCADE, null=True)
+	countEval = models.IntegerField(null=True)
+	countKeyword = models.IntegerField(null=True)
+
+	class Meta:
+		ordering = ['-countEval','-countKeyword']
+
+	def __str__(self):
+		return self.prof.professor + "(" + self.prof.major + ")"
+
+class ratingMajor(models.Model):
+	major = models.ForeignKey(majors, on_delete=models.CASCADE, null=True)
+	countBoard = models.IntegerField(null=True)
+	countKeyword = models.IntegerField(null=True)
+
+	class Meta:
+		ordering = ['-countBoard','-countKeyword']
+
+	def __str__(self):
+		return self.major.major + "(" + self.major.college + ")"
