@@ -137,10 +137,17 @@
 		{% block content %}{% endblock %}
 <!-- gaemsung popup -->
 <div class="gaemsung_item">
-    <div>
+    <div class="close">
         <span onClick="closeLayer(this)" style="cursor:pointer;font-size:1.5em" title="닫기">X</span>
     </div>
-    클릭하였을때 나오는곳</br>
+    <h6>
+    <div class="d">
+    <div style="float: left;"><img src="{% static 'img/bar_chart_professor_Credit.png'%}" width="330px"; ></div>
+    </div>
+    <div class="d">
+    <div style="float: left;"><img src="{% static 'img/bar_chart_professor_Credit.png'%}" width="330px";></div>
+
+</div>
 </div>
 <!-- gaemsung popup end -->
 	<!-- Footer section -->
@@ -150,10 +157,10 @@
 			<div class="social-links-warp">
 				<div class="container">
 					<div class="social-links">
-						<a href="{% url 'us'%}" class="instagram"><img src="{% static 'img/user.png'%}" height ="30px" weight="30px" alt=""><span>About us</span></a>
-						<a href="{% url 'faq'%}" class="instagram"><img src="{% static 'img/help.png'%}" height ="30px" weight="30px" alt=""><span>FAQ</span></a>
-						<a href="{% url 'sitemap'%}" class="instagram"><img src="{% static 'img/site.png'%}" height ="30px" weight="30px" alt=""><span>sitemap</span></a>
-						<a href="" class="instagram"><img src="{% static 'img/email.png'%}" height ="30px" weight="30px" alt=""><span>email</span></a>
+						<a href="{% url 'us'%}" class="instagram"><img src="{% static 'img/user.png'%}"alt=""><span>About us</span></a>
+						<a href="{% url 'faq'%}" class="instagram"><img src="{% static 'img/help.png'%}" alt=""><span>FAQ</span></a>
+						<a href="{% url 'sitemap'%}" class="instagram"><img src="{% static 'img/site.png'%}" alt=""><span>sitemap</span></a>
+						<a href="" class="instagram"><img src="{% static 'img/email.png'%}"alt=""><span>email</span></a>
 					</div>
 				</div>
 	

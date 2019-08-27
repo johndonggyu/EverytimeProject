@@ -1634,6 +1634,11 @@ ul{
 
 .social-links a.instagram:hover i {
 	color: #2F5D84;
+
+}
+.social-links img{
+	width: 30px;
+	height: 30px;
 }
 
 .social-links a.google-plus:hover i {
@@ -2975,12 +2980,12 @@ ul{
     display: none;
     background-color: #ffffff;
     border: solid 2px #d0d0d0;
-    width: 350px;
-    height: 150px;
-    padding: 10px;
+    width: 700px;
+    padding: 5px;
 }
-.gaemsung_item div {
+.gaemsung_item .close {
     position: absolute;
     top: 5px;
     right: 5px
+   
 }
