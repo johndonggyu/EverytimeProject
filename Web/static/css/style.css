@@ -105,8 +105,13 @@ ol {
 
 .section-title {
 	text-align: center;
+	
 }
 
+.section-title h4{
+	text-align: center;
+	margin-bottom: 30px;
+}
 
 .section-title h2 {
 	font-size: 36px;
@@ -880,7 +885,7 @@ ul{
 
 .bf-pic2 img{
 	width:100%;
-	height:240px;
+	height:300px;
 	vertical-align: middle;
 }
 
@@ -1246,6 +1251,8 @@ ul{
 	position: relative;
 	display: block;
 	border : solid black 1px;
+	width: 300px;
+
 }
 
 .product-item .tag-new,
@@ -1339,13 +1346,14 @@ ul{
 	height: 100px;
 	margin-left: 10px;
 	font-weight:bold;
+	width: 300px;
 
 }
 
 
 .product-item .pi-text h6 {
 	float: right;
-	padding-left: 40px;
+	padding-left: 20px;
 	overflow: hidden;
 	font-weight: 700;
 	color: #111111;
@@ -1368,6 +1376,10 @@ ul{
 .main-section .section-title {
 	margin-bottom: 10px;
 	/*border: solid 1px black ;*/
+}
+
+.main-section .info-widget{
+	position: fixed;
 }
 
 .product-filter-section .section-title {
@@ -1688,7 +1700,7 @@ ul{
 ------------------*/
 
 .main-section{
-	margin-bottom: 50px;
+	margin-bottom: 10px;
 }
 /*.main-section .container{
  	width: 1600px;
@@ -1708,6 +1720,7 @@ ul{
     margin-bottom: 20px;
 	text-align: center;
 	float: left;
+	background-color: white;
 }
 .info-widget img{
 	margin-top:20px;
@@ -1719,6 +1732,8 @@ ul{
 	color: #414141;
 	text-transform: uppercase;
 	text-align: center;
+	width:170px;
+	height: 50px;
 }
 .info-widget button{
 	text-align: center;
@@ -2534,7 +2549,7 @@ ul{
 .checkout-cart {
 	margin-top: 20px;
 	border: solid 1.5px #8f8f8f;
-	padding: 40px 38px 30px;
+	padding: 40px 38px 40px;
 	/*border-radius: 10px;*/
 	opacity: 1;
 }

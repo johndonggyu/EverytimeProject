@@ -2,10 +2,8 @@
 {% load staticfiles %}
 {% block content %}
 		<!-- Info section -->
-	<section class="main-section spad">
-		<div class="container">
+      <section class="main-section spad">
 			<div class="row">
-				<!-- <div class="col-lg-2 order-2 order-lg-1"> -->
 					<div class="info-widget">
 						<img src="{% static './img/main_user.png'%}">
 						<h3 class="fw-title">{{ user }}      
@@ -13,10 +11,16 @@
 						<button onclick="return infowindow()" type="submit" class=" btn btn-default" style="width:90% ">개인정보확인</button>
 						<button onclick="location.href='{% url 'password_change'%}'" type="submit" class=" btn btn-default" style="width:90%" >비밀번호 변경</button>
 					</div>
+
 				
 		<!-- Info section end  -->
 		<!-- professor ranking -->
-				<div class="col-lg-10  order-1 order-lg-2 mb-5 mb-lg-0">
+
+    <div class="container">
+      <div class="section-title">
+      <h4>인 기 교 수 님</h4>
+      </div>
+				<div class="col-lg-12  order-1 order-lg-2 mb-5 mb-lg-0">
 					<div class="row">
 						<div class="col-lg-4 col-sm-6">
 							<div class="product-item">
@@ -58,14 +62,16 @@
 				</div>
 			</div>
 			<!-- ranking end -->
+
+
 			<!-- profiling ranking -->
-  <section class="product-filter-section">
+<!--   <section class="product-filter-section"> -->
     <div class="container">
         <div class="row">
 <!--           <div class="col-xs-1">
           </div> -->
 	        <div class="col-xs-12 col-md-6">
-	          <div class="checkout-cart" style="height: 410px">
+	          <div class="checkout-cart" style="height: 500px">
               <div class="section-title">
                   <h4> 전체 프로파일링 인기 키워드 </h4>
               </div>
@@ -112,7 +118,7 @@
           </div>
         </div>
         <div class="col-xs-12 col-md-6">
-          <div class="checkout-cart" style="height: 410px">
+          <div class="checkout-cart" style="height: 500px">
               <div class="section-title">
                   <h4> 인기 학과 </h4>
               </div>
