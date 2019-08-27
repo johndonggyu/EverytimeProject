@@ -685,6 +685,8 @@ join section
 	border:solid 3px #ddd;
 	background:#fff;
 }
+
+
 .join-section-header{
 	padding : 30px 0 30px 0;
 	text-align: center;
@@ -709,6 +711,10 @@ join section
 .join-section .in_form{
 	position:relative;
 	padding: 0 0 0 80px;
+}
+
+.join-section label{
+	margin-right: 20px;
 }
 
 
