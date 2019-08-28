@@ -50,7 +50,7 @@ urlpatterns = [
     path('error/', views.error, name='error'),
     path('fpw1/', views.fpw1, name='fpw1'),
     path('fpw2/', views.fpw2, name='fpw2'),
-    path('chart/<str:dept>/<str:pname>', views.chart, name='chart'),
+    # path('chart/<str:dept>/<str:pname>', views.chart, name='chart'),
     # path(
     #     'change_password/',
     #     auth_views.PasswordChangeView.as_view(
@@ -66,11 +66,11 @@ urlpatterns = [
         template_name='./password_change_done.html'),name="password_change_done"),
 
     ## Main Page Top Keywords
-    path('topKeywords/', views.topKeywords, name='topKeywords'),
-    # initTops는 인기교수님DB 초기화하는 기능임
-    path('initTops/', views.initTops, name='initTops'),
-    path('topProfessors/', views.topProfessors, name='topProfessors'),
-    path('topMajors/', views.topMajors, name='topMajors'),
+    # path('topKeywords/', views.topKeywords, name='topKeywords'),
+    # # initTops는 인기교수님DB 초기화하는 기능임
+    # path('initTops/', views.initTops, name='initTops'),
+    # path('topProfessors/', views.topProfessors, name='topProfessors'),
+    # path('topMajors/', views.topMajors, name='topMajors'),
 
     # # Forget Password
     path('password_reset/', PasswordResetView.as_view(
