@@ -181,6 +181,8 @@ class ratingMajor(models.Model):
 	major = models.ForeignKey(majors, on_delete=models.CASCADE, null=True)
 	countBoard = models.IntegerField(null=True)
 	countKeyword = models.IntegerField(null=True)
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 
 	class Meta:
 		ordering = ['-countBoard','-countKeyword']

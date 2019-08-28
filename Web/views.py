@@ -443,8 +443,8 @@ def major(request, dept):
 
 def word_cloud(request, blog_id):
 	try:
-		year = '2019' #월별에 대한 하드코딩
-		month = '01'
+		year = '2019' #
+		month = datetime.now().month - 1
 		words_json = [{'text': bkey.keyword, 'weight': bkey.count, 'link': "#"+bkey.keyword} for bkey in board_keyword.objects.filter(code=blog_id,word_date__year=year).filter(word_date__month=month).order_by('-count')]
 		# [dict, dict, dcit, ...]
 		return HttpResponse(json.dumps(words_json))
@@ -482,8 +482,33 @@ def topKeywords(request):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	try:
-		keywords = [{'professor': bkey.keyword, 'count': bkey.count} for bkey in board_keyword.objects.all().order_by('-count')[:10]]
-		return HttpResponse(keywords)
+		a = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('keyword',flat=True)[:5]
+		b = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('count',flat=True)[:5]
+		c = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('pos_percent',flat=True)[:5]
+		d = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('neg_percent',flat=True)[:5]
+
+		e = [{'keyword': keyword } for keyword in a]
+		f = [{'count': count } for count in b]
+		g = [{'pos_percent': p } for p in c]
+		h = [{'neg_percent': n } for n in d]
+
+		e[0]['count'] = f[0]['count']
+		e[1]['count'] = f[1]['count']
+		e[2]['count'] = f[2]['count']
+		e[3]['count'] = f[3]['count']
+		e[4]['count'] = f[4]['count']
+		e[0]['pos_percent'] = g[0]['pos_percent']
+		e[1]['pos_percent'] = g[1]['pos_percent']
+		e[2]['pos_percent'] = g[2]['pos_percent']
+		e[3]['pos_percent'] = g[3]['pos_percent']
+		e[4]['pos_percent'] = g[4]['pos_percent']
+		e[0]['neg_percent'] = h[0]['neg_percent']
+		e[1]['neg_percent'] = h[1]['neg_percent']
+		e[2]['neg_percent'] = h[2]['neg_percent']
+		e[3]['neg_percent'] = h[3]['neg_percent']
+		e[4]['neg_percent'] = h[4]['neg_percent']
+		keywords = e#[{'keyword': bkey.keyword, 'count': bkey.count, 'pos':bkey.pos_percent, 'neg':bkey.neg_percent} for bkey in board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month).order_by('-count')[:10]]
+		return HttpResponse(json.dumps(keywords))
 		#return render(request, 'blahblahblah.html', {
 		#	'colleges' : _colleges,
 		#	'majors' : _majors,
@@ -497,8 +522,8 @@ def topProfessors(request):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	try:
-		topProf = [{'professor': bkey.prof.professor, 'count': bkey.countEval + bkey.countKeyword} for bkey in ratingProfessor.objects.order_by('-countEval','-countKeyword')[:3]]
-		return HttpResponse(topProf)
+		topProf = [{'professor': bkey.prof.professor, 'count': bkey.countEval + bkey.countKeyword, 'major': bkey.prof.major, 'picture': bkey.prof.picture} for bkey in ratingProfessor.objects.order_by('-countEval','-countKeyword')[:3]]
+		return HttpResponse(json.dumps(topProf))
 		#return render(request, 'blahblahblah.html', {
 		#	'colleges' : _colleges,
 		#	'majors' : _majors,
@@ -542,8 +567,8 @@ def topMajors(request):
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	try:
-		topMajor = [{'major': bkey.major.major, 'count': bkey.countBoard + bkey.countKeyword} for bkey in ratingMajor.objects.order_by('-countBoard','-countKeyword')[:5]]
-		return HttpResponse(topMajor)
+		topMajor = [{'major': bkey.major.major, 'count': bkey.countBoard + bkey.countKeyword, 'pos_percent':bkey.pos_percent, 'neg_percent':bkey.neg_percent} for bkey in ratingMajor.objects.order_by('-countBoard','-countKeyword')[:5]]
+		return HttpResponse(json.dumps(topMajor))
 		#return render(request, 'blahblahblah.html', {
 		#	'colleges' : _colleges,
 		#	'majors' : _majors,

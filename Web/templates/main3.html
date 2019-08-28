@@ -1,6 +1,49 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
+<script>
+var words_data;
+$(document).ready(function () {
+   var opt = location.href.split('/')[3];
+    if(opt == "main"){
+      	$.ajax({url: '/topKeywords/', success: function (data) {
+        	words_data = $.parseJSON(data);
+  	 	}});
+  	 	$.ajax({url: '/topProfessors/', success: function (data){
+  	 		words_data2 = $.parseJSON(data);
+  	 	}});
+  	 	$.ajax({url: '/topMajors/', success: function (data){
+  	 		words_data3 = $.parseJSON(data);
+  	 	}});
+    }
+    setTimeout(function(){
+		$('table#topKeywords').find('.topKwd').each(function(i, e){
+			$('.topKwd')[i].innerHTML = words_data[i].keyword;
+			$('.topCnt')[i].innerHTML = words_data[i].count;
+			$('.topPos')[i].innerHTML = words_data[i].pos_percent;
+			$('.topNeg')[i].innerHTML = words_data[i].neg_percent;
+		});
+		$('.topProf').each(function(i, e){
+			e.innerHTML = words_data2[i].professor;
+		});
+		$('.topProf').next().each(function(i, e){
+		    e.innerHTML = words_data2[i].major;
+		});
+		$('.topProfImage').each(function(i, e){
+			e.src = words_data2[i].picture;
+		});
+		$('.topProfUrl').each(function(i, e){
+			e.href = document.location.protocol+'//'+document.location.host+'/individual/'+words_data2[i].major+'/'+words_data2[i].professor;
+		});
+		$('table#topMajorKeywords').find('.topKwd2').each(function(i, e){
+			$('.topKwd2')[i].innerHTML = words_data3[i].major;
+			$('.topCnt2')[i].innerHTML = words_data3[i].count;
+			$('.topPos2')[i].innerHTML = words_data3[i].pos_percent;
+			$('.topNeg2')[i].innerHTML = words_data3[i].neg_percent;
+		});
+	}, 500);
+});
+</script>
 		<!-- Info section -->
 	<section class="main-section spad">
 		<div class="container">
@@ -21,10 +64,10 @@
 							<div class="product-item">
 								<div class="pi-pic">
 									<div class="tag-sale">1등</div>
-									<a href="{% url 'bbs' blog_id=2 %}"><img src="{% static './img/word.png'%}" alt=""></a>
+									<a href="{% url 'bbs' blog_id=2 %}" class="topProfUrl"><img src="{% static './img/word.png'%}" alt="" class="topProfImage"></a>
 								</div>
 								<div class="pi-text">
-									<h6>000교수님</h6>
+									<h6 class="topProf">000교수님</h6>
 									<p>컴퓨터과학과</p>
 								</div>
 							</div>
@@ -33,10 +76,10 @@
 							<div class="product-item">
 								<div class="pi-pic">
 									<div class="tag-sale">2등</div>
-									<a href="{% url 'bbs' blog_id=3 %}"><img src="{% static './img/word.png'%}" alt=""></a>
+									<a href="{% url 'bbs' blog_id=3 %}"><img src="{% static './img/word.png'%}" alt="" class="topProfImage"></a>
 								</div>
 								<div class="pi-text">
-									<h6>000교수님</h6>
+									<h6 class="topProf">000교수님</h6>
 									<p>컴퓨터과학과</p>
 								</div>
 							</div>
@@ -45,10 +88,10 @@
 							<div class="product-item">
 								<div class="pi-pic">
 									<div class="tag-sale">3등</div>
-									<a href="{% url 'bbs' blog_id=4 %}"><img src="{% static './img/word.png'%}" alt=""></a>
+									<a href="{% url 'bbs' blog_id=4 %}"><img src="{% static './img/word.png'%}" alt="" class="topProfImage"></a>
 								</div>
 								<div class="pi-text">
-									<h6>000교수님</h6>
+									<h6 class="topProf">000교수님</h6>
 									<p>컴퓨터과학과</p>
 								</div>
 							</div>
@@ -70,7 +113,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table tablesorter " id="">
+                  <table class="table tablesorter " id="topKeywords">
                     <thead class=" text-primary">
                       <tr>
                         <th>
@@ -91,19 +134,99 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for key in t10kwd %}
                       <tr>
                          <td>
-                          {{forloop.counter}}
+                          1
                         </td>
-                        <td>
-                          {{ key.keyword }}
+                        <td class="text-center topKwd">
+                          blank
                         </td>
-                        <td class="text-center">
-                          {{ key.count }}
+                        <td class="text-center topCnt">
+                          blank
+                        </td>
+                        <td class="text-center topPos">
+                          blank
+                        </td>
+                        <td class="text-center topNeg">
+                          blank
                         </td>
                       </tr>
-                      {% endfor %}
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          2
+                        </td>
+                        <td class="text-center topKwd">
+                          blank
+                        </td>
+                        <td class="text-center topCnt">
+                          blank
+                        </td>
+                        <td class="text-center topPos">
+                          blank
+                        </td>
+                        <td class="text-center topNeg">
+                          blank
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          3
+                        </td>
+                        <td class="text-center topKwd">
+                          blank
+                        </td>
+                        <td class="text-center topCnt">
+                          blank
+                        </td>
+                        <td class="text-center topPos">
+                          blank
+                        </td>
+                        <td class="text-center topNeg">
+                          blank
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          4
+                        </td>
+                        <td class="text-center topKwd">
+                          blank
+                        </td>
+                        <td class="text-center topCnt">
+                          blank
+                        </td>
+                        <td class="text-center topPos">
+                          blank
+                        </td>
+                        <td class="text-center topNeg">
+                          blank
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          5
+                        </td>
+                        <td class="text-center topKwd">
+                          blank
+                        </td>
+                        <td class="text-center topCnt">
+                          blank
+                        </td>
+                        <td class="text-center topPos">
+                          blank
+                        </td>
+                        <td class="text-center topNeg">
+                          blank
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -117,7 +240,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table tablesorter " id="">
+                  <table class="table tablesorter " id="topMajorKeywords">
                     <thead class=" text-primary">
                       <tr>
                         <th>
@@ -138,19 +261,99 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for key in t10kwd %}
                       <tr>
                          <td>
-                          {{forloop.counter}}
+                          1
                         </td>
-                        <td>
-                          {{ key.keyword }}
+                        <td class="text-center topKwd2">
+                          blank
                         </td>
-                        <td class="text-center">
-                          {{ key.count }}
+                        <td class="text-center topCnt2">
+                          blank
+                        </td>
+                        <td class="text-center topPos2">
+                          blank
+                        </td>
+                        <td class="text-center topNeg2">
+                          blank
                         </td>
                       </tr>
-                      {% endfor %}
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          2
+                        </td>
+                        <td class="text-center topKwd2">
+                          blank
+                        </td>
+                        <td class="text-center topCnt2">
+                          blank
+                        </td>
+                        <td class="text-center topPos2">
+                          blank
+                        </td>
+                        <td class="text-center topNeg2">
+                          blank
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          3
+                        </td>
+                        <td class="text-center topKwd2">
+                          blank
+                        </td>
+                        <td class="text-center topCnt2">
+                          blank
+                        </td>
+                        <td class="text-center topPos2">
+                          blank
+                        </td>
+                        <td class="text-center topNeg2">
+                          blank
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          4
+                        </td>
+                        <td class="text-center topKwd2">
+                          blank
+                        </td>
+                        <td class="text-center topCnt2">
+                          blank
+                        </td>
+                        <td class="text-center topPos2">
+                          blank
+                        </td>
+                        <td class="text-center topNeg2">
+                          blank
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                         <td>
+                          5
+                        </td>
+                        <td class="text-center topKwd2">
+                          blank
+                        </td>
+                        <td class="text-center topCnt2">
+                          blank
+                        </td>
+                        <td class="text-center topPos2">
+                          blank
+                        </td>
+                        <td class="text-center topNeg2">
+                          blank
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -162,6 +365,6 @@
 	</section>
 <!-- profiling ranking end -->
 </div>
-</section>			
+</section>
 
 {% endblock %}

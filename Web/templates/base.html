@@ -8,6 +8,10 @@
 	<meta name="description" content=" Divisima | eCommerce Template">
 	<meta name="keywords" content="divisima, eCommerce, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- jquery -->
+	<script src="{% static 'js/jquery-3.2.1.min.js'%}"></script>
+
 	<!-- Favicon -->
 	<link href="{% static 'img/favicon.ico'%}" rel="shortcut icon"/>
 {% if user.is_authenticated %}
@@ -169,7 +173,6 @@
 		<!-- Footer section end -->
 
 	<!--====== Javascripts & Jquery ======-->
-	<script src="{% static 'js/jquery-3.2.1.min.js'%}"></script>
 	<script src="{% static 'js/bootstrap.min.js'%}"></script>
 	<script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
 	<script src="{% static 'js/owl.carousel.min.js'%}"></script>
