@@ -16,235 +16,34 @@
                       	</th>
                     </thead>
                     <tbody>
-                      <tr>
-                         <td>
+                      <tr>{% for c in colleges %}
+                        <td>
                           <a href="{% url 'pf' pf_id=2 %}" style="font-weight: bold;">인문사회과학대학</a>
                         </td>
+                        {% if c.college == '계당교양교육원' %}
+                        <a href="/pf/계당교양교육원">{{ c.college }}</a>
+                        {% endif %}
+                        {% if c.college != '계당교양교육원' %}
+                        <a href="#">{{ c.college }}</a>
                         <td>
-                          <a href="{% url 'pf' pf_id=3 %}">역사콘텐츠학과</a>
+                          <a href="#">{{ c.college }}</a>
+                        </td>
+                        {% endif %}
+                      </tr>
+                        <tr>
+                        <td>
+                        </td>
+                        <td>
+                          {% for m in majors %}
+                          {% if m.college == c %}
+                          {% if m.major != '' %}
+                        <li><a href="{% url 'pf' pf_id=m.major %}">{{ m.major }}</a></li>
+                       {% endif %}
+                        {% endif %}
+                        {% endfor %}
                         </td>
                       </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=4 %}">지적재산학과</a>
-                        </td>
-                      </tr>
-                         <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=5 %}">문헌정보학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                         <a href="{% url 'pf' pf_id=10 %}">한일문화콘텐츠학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=6 %}">공간환경학부</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=7 %}">공공인재학부</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=8 %}">가족복지학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=9 %}">국가안보학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          <a href="{% url 'pf' pf_id=11 %}" style="font-weight: bold;">사범대학</a>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=12 %}">국어교육과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=13 %}">영어교육과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=14 %}">교육학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=15 %}">수학교육과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          <a href="{% url 'pf' pf_id=16 %}" style="font-weight: bold;">경영경제대학</a>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=17 %}">경제금육학부</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=18 %}">경영학부</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=19 %}" >글로벌경영학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=20 %}" >융합경영학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          <a href="{% url 'pf' pf_id=21 %}" style="font-weight: bold;">융합공과대학</a>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=22 %}">휴먼지능정보공학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=23 %}">전기공학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=24 %}">융합전자공학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=25 %}">컴퓨터과학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          <a href="" style="font-weight: bold;">생명화학공학부</a>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=26 %}">생명공학과</a>
-                        </td>
-                      </tr>
-                         <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=27 %}">화학에너지공학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=28 %}">화공신소재학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=29 %}">게임학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          <a href="{% url 'pf' pf_id=30 %}" style="font-weight: bold;">문화예술대학</a>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=31 %}">식품영양학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=32 %}">의류학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=33 %}">스포츠건강관리학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=34 %}">조형예술학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=35 %}">생활예술학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=36 %}">무용예술학과</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=37 %}">음악학부</a>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                        </td>
-                        <td>
-                          <a href="{% url 'pf' pf_id=38 %}">계당교양교육원</a>
-                        </td>
+                        {% endfor %}
                       </tr>
                     </tbody>
                   </tr>
@@ -254,7 +53,7 @@
           </div>
         </div>
 
-	<div class="sitemap">
+	<!-- <div class="sitemap">
 			<div class="card-body">
                 <div class="table-responsive">
                   <table class="table tablesorter table-condensed" id="">
@@ -574,7 +373,7 @@
               </table>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
 
