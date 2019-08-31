@@ -48,8 +48,6 @@ urlpatterns = [
     path('word_cloud/<str:blog_id>', views.word_cloud, name='word_cloud'),
     path('word_cloud/<str:major_id>/<str:pf_id>', views.word_cloud2, name='word_cloud2'),
     path('error/', views.error, name='error'),
-    path('fpw1/', views.fpw1, name='fpw1'),
-    path('fpw2/', views.fpw2, name='fpw2'),
     # path('chart/<str:dept>/<str:pname>', views.chart, name='chart'),
     # path(
     #     'change_password/',
