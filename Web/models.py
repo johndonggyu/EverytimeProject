@@ -13,7 +13,8 @@ class colleges(models.Model):
 class majors(models.Model):
 	college = models.ForeignKey(colleges,null=True,on_delete=models.CASCADE)
 	major = models.CharField(null=True,default='',max_length=20)
-	
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 	class Meta:
 		unique_together = (("college", "major"),)
 
@@ -101,7 +102,8 @@ class smu_professor(models.Model):
 	professor = models.CharField(null=True,default='',max_length=20)
 	information = models.CharField(null=True,default='',max_length=100)
 	picture = models.CharField(null=True,default='',max_length=100)
-
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 	class Meta:
 		unique_together = (("major", "professor"),)
 
@@ -179,9 +181,11 @@ class ratingMajor(models.Model):
 	major = models.ForeignKey(majors, on_delete=models.CASCADE, null=True)
 	countBoard = models.IntegerField(null=True)
 	countKeyword = models.IntegerField(null=True)
+	pos_percent = models.FloatField(null=True,default=0.00)
+	neg_percent = models.FloatField(null=True,default=0.00)
 
 	class Meta:
 		ordering = ['-countBoard','-countKeyword']
 
 	def __str__(self):
-		return self.major.major + "(" + self.major.college + ")"
+		return self.major.major

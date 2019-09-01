@@ -453,6 +453,109 @@ def word_cloud4(request, major_id):
 	except Exception as e:
 		print(e)
 		return HttpResponse("[]")
+<<<<<<< HEAD
+=======
+## 메인페이지 인기 키워드 10개
+def topKeywords(request):
+	_colleges = colleges.objects.all()
+	_majors = majors.objects.all()
+	try:
+		a = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('keyword',flat=True)[:5]
+		b = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('count',flat=True)[:5]
+		c = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('pos_percent',flat=True)[:5]
+		d = board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month-1).order_by('-count').values_list('neg_percent',flat=True)[:5]
+
+		e = [{'keyword': keyword } for keyword in a]
+		f = [{'count': count } for count in b]
+		g = [{'pos_percent': p } for p in c]
+		h = [{'neg_percent': n } for n in d]
+
+		e[0]['count'] = f[0]['count']
+		e[1]['count'] = f[1]['count']
+		e[2]['count'] = f[2]['count']
+		e[3]['count'] = f[3]['count']
+		e[4]['count'] = f[4]['count']
+		e[0]['pos_percent'] = g[0]['pos_percent']
+		e[1]['pos_percent'] = g[1]['pos_percent']
+		e[2]['pos_percent'] = g[2]['pos_percent']
+		e[3]['pos_percent'] = g[3]['pos_percent']
+		e[4]['pos_percent'] = g[4]['pos_percent']
+		e[0]['neg_percent'] = h[0]['neg_percent']
+		e[1]['neg_percent'] = h[1]['neg_percent']
+		e[2]['neg_percent'] = h[2]['neg_percent']
+		e[3]['neg_percent'] = h[3]['neg_percent']
+		e[4]['neg_percent'] = h[4]['neg_percent']
+		keywords = e#[{'keyword': bkey.keyword, 'count': bkey.count, 'pos':bkey.pos_percent, 'neg':bkey.neg_percent} for bkey in board_keyword.objects.filter(code='370450',word_date__year='2019',word_date__month=datetime.now().month).order_by('-count')[:10]]
+		return HttpResponse(json.dumps(keywords))
+		#return render(request, 'blahblahblah.html', {
+		#	'colleges' : _colleges,
+		#	'majors' : _majors,
+		#	'keywords' : keywords,
+		#	})
+	except Exception as e:
+		print(e)
+		return HttpResponse("[]")
+## 메인페이지 인기 교수님 3명
+def topProfessors(request):
+	_colleges = colleges.objects.all()
+	_majors = majors.objects.all()
+	try:
+		topProf = [{'professor': bkey.prof.professor, 'count': bkey.countEval + bkey.countKeyword, 'major': bkey.prof.major, 'picture': bkey.prof.picture} for bkey in ratingProfessor.objects.order_by('-countEval','-countKeyword')[:3]]
+		return HttpResponse(json.dumps(topProf))
+		#return render(request, 'blahblahblah.html', {
+		#	'colleges' : _colleges,
+		#	'majors' : _majors,
+		#	'topProf' : topProf,
+		#	})
+	except Exception as e:
+		print(e)
+		return HttpResponse("[]")
+## 인기 관련 초기화
+def initTops(request):
+	# 인기 교수님 & 학과 초기화
+	try:
+		ratingProfessor.objects.all().delete()
+		ratingMajor.objects.all().delete()
+
+		b = smu_professor.objects.all()
+		for a in b:
+			bcnt = Eval.objects.filter(comment_prof__professor__professor__major=a.major,comment_prof__professor__professor__professor=a.professor).count()
+			kwdcnt = professor_keyword.objects.filter(major=a.major,professor=a.professor).count()
+			ratingProfessor(prof=a,countEval=bcnt,countKeyword=kwdcnt).save()
+		
+		d = majors.objects.all()
+		for c in d:
+			try:
+				e = major_synonym.objects.get(major=c.major)
+				majorList = e.synonym.split('|')
+				bcnt = 0
+				for majorSyn in majorList:
+					bcnt += board.objects.filter(contents__contains=majorSyn).count()
+				kwdcnt = major_keyword.objects.filter(major=c.major).count()
+				ratingMajor(major=c,countBoard=bcnt,countKeyword=kwdcnt).save()
+			except Exception as e:
+				print(e)
+				pass
+		return HttpResponse("초기화 완료")
+	except Exception as e:
+		print(e)
+		return HttpResponse("초기화 에러")
+## 메인페이지 인기 학과 5개
+def topMajors(request):
+	_colleges = colleges.objects.all()
+	_majors = majors.objects.all()
+	try:
+		topMajor = [{'major': bkey.major.major, 'count': bkey.countBoard + bkey.countKeyword, 'pos_percent':bkey.pos_percent, 'neg_percent':bkey.neg_percent} for bkey in ratingMajor.objects.order_by('-countBoard','-countKeyword')[:5]]
+		return HttpResponse(json.dumps(topMajor))
+		#return render(request, 'blahblahblah.html', {
+		#	'colleges' : _colleges,
+		#	'majors' : _majors,
+		#	'topMajor' : topMajor,
+		#	})
+	except Exception as e:
+		print(e)
+		return HttpResponse("[]")
+>>>>>>> eb365d2bb781370da842943e1260e8a62fa9274d
 
 #OK_수정
 def error(request):
