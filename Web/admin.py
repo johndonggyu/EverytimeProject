@@ -85,7 +85,7 @@ class ratingProfessorAdmin(admin.ModelAdmin):
 	search_fields = ['prof__professor','prof__major']
 admin.site.register(ratingProfessor,ratingProfessorAdmin)
 class ratingMajorAdmin(admin.ModelAdmin):
-	list_display = ['major','countBoard','countKeyword']
+	list_display = ['major','countBoard','countKeyword','pos_percent','neg_percent']
 	list_display_links = ['major']
 	list_filter = ['major__college']
 	search_fields = ['major__major','major__college']
