@@ -310,8 +310,8 @@ def keyword(request):
 	return render(request, 'keyword.html')
 
 def bbs(request,blog_id):
-	year = '2019'
-	month = '01'
+	year = datetime.now().year
+	month = datetime.now().month - 1
 	_colleges = colleges.objects.all()
 	_majors = majors.objects.all()
 	## bcode
