@@ -48,7 +48,7 @@ urlpatterns = [
     path('word_cloud/<str:blog_id>', views.word_cloud, name='word_cloud'),
     path('word_cloud/<str:major_id>/<str:pf_id>', views.word_cloud2, name='word_cloud2'),
     path('error/', views.error, name='error'),
-    # path('chart/<str:dept>/<str:pname>', views.chart, name='chart'),
+    path('chart/<str:dept>/<str:pname>', views.chart, name='chart'),
     # path(
     #     'change_password/',
     #     auth_views.PasswordChangeView.as_view(
