@@ -71,7 +71,12 @@ def main(request):
 		})
 
 def sitemap(request):
-	return render(request, 'sitemap.html')
+	_colleges = colleges.objects.all()
+	_majors = majors.objects.all()
+	return render(request, 'sitemap.html', {
+		'colleges' : _colleges,
+		'majors' : _majors,
+		})
 
 def faq(request):
 	return render(request, 'faq.html')
