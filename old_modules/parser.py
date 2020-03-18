@@ -14,8 +14,8 @@ from urllib import parse
 #############################
 i = 0 	   				 ####
 BNUM = 100 				 ####
-ID = 'johndonggyu'		 ####
-PW = 'everytime1234!@#$' ####              
+ID = '아이디'		 ####
+PW = '비밀번호' ####              
 #############################
 def eval_crawling(s, data, m):
 	print(m+" 크롤링 중 입니다. 잠시만 기다려주세요.")
