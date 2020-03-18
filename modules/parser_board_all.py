@@ -19,8 +19,8 @@ from datetime import datetime
 #############################
 i = 0 	   				 ####
 #BNUM = 100 			 ####
-ID = 'johndonggyu'		 ####
-PW = 'everytime1234!@#$' ####
+ID = '아이디'		 ####
+PW = '비밀번호' ####
 boardcode_ = 0              
 #############################
 def board_crawling(s, data, bid, limit_date, opt): #limit_num
