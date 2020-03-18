@@ -177,8 +177,8 @@ professor_list = []
 
 ## 로그인할 유저정보를 넣어줍시다. (모두 문자열입니다)
 LOGIN_INFO = {
-    'userid': 'johndonggyu',
-    'password': 'everytime1234!@#$'
+    'userid': '아이디',
+    'password': '비밀번호'
 }
 
 LOGIN_INFO = {**LOGIN_INFO}
