@@ -713,8 +713,8 @@ keyword테이블에 넣기만하고,
 
 #1 이메일 인증 관련
 이메일 인증용 계정(gmail)
-아이디: haeoksung1234@gmail.com
-비밀번호: everytime1234!@#$
+아이디: 해옥성 지메일
+비밀번호: 비밀번호
 settings.py 참고
 
 이메일 인증 구현함.
